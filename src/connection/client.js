@@ -24,4 +24,6 @@ export const handleError = (error) => {
     // Ocurrió un error al realizar la solicitud
     console.log("Error al realizar la solicitud:", error.message);
   }
+
+  return [];
 };
