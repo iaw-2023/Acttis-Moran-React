@@ -118,7 +118,20 @@
   .page__nav__cart__icon:hover{
     text-shadow: var(--nav-enterprise-color) 0 0 5px;
   }
-  
+
+.home__nav__cart__icon__info{
+  margin-top: 35px;
+  margin-left: 30px;
+  position: fixed;
+  text-align: center;
+  font-size: 62%;
+  color: var(--bg-color-transparent);
+  z-index: 100;
+  width: 1rem;
+  height: 1rem;
+  border-radius: 100% 100%;
+  background-color: var(--notification-color);
+}
 
   @media screen and (max-width: 900px) {
     .page__wrapper__navbar__container{
