@@ -2,8 +2,18 @@ import "../../css/pagewrapper.css";
 import { Link } from "react-router-dom";
 import PageFooter from "./PageFooter";
 import { MDBIcon } from "mdb-react-ui-kit";
+import { useContext, useEffect, useState } from "react";
+import CartContext from "../../context/CartProvider";
 
 export default function PageWrapper(props) {
+
+  const { cart, setCart } = useContext(CartContext);
+  const [cartInfoItems, setCartInfoItems] = useState(cart.length);
+
+  useEffect(() => {
+    setCartInfoItems(cart.length);
+    }, [cart]);
+
   return (
     <div className="page__container">
       <div id="page__background"></div>
@@ -33,6 +43,7 @@ export default function PageWrapper(props) {
               fas
               icon="shopping-cart"
             />
+            <div className="home__nav__cart__icon__info">{cartInfoItems}</div>
           </Link>
         </nav>
       </section>
