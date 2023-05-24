@@ -1,19 +1,26 @@
 import { useEffect, useState } from "react";
 import MatchgameCard from "./MatchgameCard";
 import { getExampleMatches, getMatchesBy } from "../../connection/requests";
+import { motion, AnimatePresence } from "framer-motion";
+import TextTransition, { presets } from "react-text-transition";
 
 export default function SearchMatchgamesResults(props) {
   const [listMatchgames, setListMatchgames] = useState([]);
-  const [listMatchgameCards, setListMatchgameCards] = useState([]);
-
+  const [infoText, setInfoText] = useState("");
   const { filters } = props;
 
   useEffect(() => {
     retreiveMatchgames();
   }, [filters]);
 
+  useEffect(() => {
+    if (listMatchgames.length == 0)
+      setInfoText("No Matchgames available for those filters!");
+    else setInfoText("");
+  }, [listMatchgames]);
+
   const retreiveMatchgames = async () => {
-    let response = false;
+    let response = [];
 
     if (filtersOff()) {
       response = await getExampleMatches();
@@ -34,7 +41,12 @@ export default function SearchMatchgamesResults(props) {
 
       response = await getMatchesBy(filterParams);
     }
-    setListMatchgames(response);
+
+    if (response.status == 200) {
+      setListMatchgames(response.data.data);
+    } else {
+      setListMatchgames([]);
+    }
   };
 
   const filtersOff = () => {
@@ -45,26 +57,27 @@ export default function SearchMatchgamesResults(props) {
     );
   };
 
-  useEffect(() => {
-    fillResults();
-  }, [listMatchgames]);
-
-  const fillResults = () => {
-    let array_matchgames = [];
-    listMatchgames.map((matchgame) => {
-      array_matchgames.push(
-        <MatchgameCard
-          key={matchgame.matchgame_id}
-          id={matchgame.matchgame_id}
-          stadium_id={matchgame.stadium.stadium_id}
-          stadium_name={matchgame.stadium.stadium_name}
-          home_team={matchgame.team_one.team.team_name}
-          away_team={matchgame.team_two.team.team_name}
-        ></MatchgameCard>
-      );
-    });
-    setListMatchgameCards(array_matchgames);
-  };
-
-  return <div className="home__body__results">{listMatchgameCards}</div>;
+  return (
+    <>
+      <span className="home__body__results__text">{infoText}</span>
+      <motion.div layout className="home__body__results">
+        <AnimatePresence>
+          {listMatchgames.map((matchgame) => {
+            return (
+              <MatchgameCard
+                key={matchgame.matchgame_id}
+                id={matchgame.matchgame_id}
+                stadiumId={matchgame.stadium.stadium_id}
+                stadiumName={matchgame.stadium.stadium_name}
+                date={matchgame.played_on_date}
+                time={matchgame.played_on_time}
+                homeTeamName={matchgame.team_one.team.team_name}
+                awayTeamName={matchgame.team_two.team.team_name}
+              ></MatchgameCard>
+            );
+          })}
+        </AnimatePresence>
+      </motion.div>
+    </>
+  );
 }

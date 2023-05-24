@@ -2,6 +2,8 @@ import { useState, useEffect } from "react";
 import Select from "react-select";
 
 export default function TeamSearchSelect(props) {
+  const { teams } = props;
+
   const [listOptions, setListOptions] = useState([]);
   const [value, setValue] = useState(0);
   const [teamName, setTeamName] = useState("");
@@ -11,7 +13,7 @@ export default function TeamSearchSelect(props) {
 
   useEffect(() => {
     fillOptions();
-  }, [props.teams]);
+  }, [teams]);
 
   useEffect(() => {
     props.onSelectTeam(value, teamName);
@@ -19,7 +21,7 @@ export default function TeamSearchSelect(props) {
 
   const fillOptions = () => {
     let array_options = [];
-    props.teams.map((team) => {
+    teams.map((team) => {
       array_options.push({
         value: team.team_id,
         label: team.team_name,

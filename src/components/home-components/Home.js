@@ -22,10 +22,18 @@ export default function Home() {
 
   const getStartupData = async () => {
     const stadiumsResponse = await getStadiums();
-    setListStadiums(stadiumsResponse);
+    if (stadiumsResponse.status == 200) {
+      setListStadiums(stadiumsResponse.data.data);
+    } else {
+      setListStadiums([]);
+    }
 
     const teamsResponse = await getTeams();
-    setListTeams(teamsResponse);
+    if (teamsResponse.status == 200) {
+      setListTeams(teamsResponse.data.data);
+    } else {
+      setListTeams([]);
+    }
   };
 
   const handleChangeOnDate = (e) => {

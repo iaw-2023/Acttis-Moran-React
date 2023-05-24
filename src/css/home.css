@@ -36,7 +36,7 @@
     font-family: 'Poppins', sans-serif;
     border-radius: 35px;
     border: solid 1px black;
-    box-shadow: black 0 0 20px;
+    box-shadow: black 0 0 10px;
     align-self: center;
   }
   
@@ -125,8 +125,10 @@
     justify-content: center;
     align-self: center;
     margin-top: 3rem;
+    margin-bottom: 3rem;
     color: var(--nav-color);
     font-size: large;
+    text-align: center;
     font-family: 'Poppins', sans-serif;
     font-weight: 200;
     text-shadow: black 0 0 2px;
@@ -142,6 +144,23 @@
     flex-wrap: wrap;
   }
 
+  .home__body__results__text{
+    width: 85%;
+    height: 4rem;
+    display: flex;
+    position: absolute;
+    top: 20rem;
+    justify-content: center;
+    text-align: center;
+    align-self: center;
+    margin-top: 3rem;
+    color: var(--notification-color);
+    font-size: large;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+    text-shadow: black 0 0 2px;
+  }
+
   .matchgame-card {
     margin-left:1rem;
     margin-top: 0.5rem;
@@ -149,16 +168,46 @@
     display: flex;
     flex-direction: column;
     width: 15rem;
-    height: 25rem;
-    
+    height: 26rem;
+    box-shadow: black 0 0 5px;
+    border-radius: 10px 10px 10px 10px;
   }
-  
-  .matchgame-card__image{
+
+  .matchgame-card__image-container{
     width: 100%;
     height: 11rem;
     border-radius: 10px 10px 0 0;
   }
   
+  .matchgame-card__image-container__stadium-image{
+    width: 100%;
+    height: 100%;
+    border-radius: 10px 10px 0 0;
+  }
+
+  .matchgame-card__image-container__team-logos{
+    position: relative;
+    bottom: 4rem;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row;
+    background-color: var(--nav-color-transparent);
+  }
+
+  .matchgame-card__image-container__hometeam-image{
+    width: 4rem;
+    height: 4rem;
+    margin-left: 0.5rem;
+    object-fit:contain;
+  }
+  
+  .matchgame-card__image-container__awayteam-image{
+    width: 4rem;
+    height: 4rem;
+    margin-right: 0.5rem;
+    object-fit:contain;
+  }
+
   .matchgame-card__title__container{
     height: 30%;
     width: 95%;
@@ -188,6 +237,17 @@
     align-self: center;
     color:var(--text-color);
     height: 40%;
+    width: 80%;
+  }
+
+  .matchgame-card__text-datetime{
+    font-family: 'Poppins', sans-serif;
+    font-size: 10px;
+    font-weight: 500;
+    text-align: center;
+    align-self: center;
+    color:var(--text-color);
+    height: 20%;
     width: 80%;
   }
   
@@ -260,7 +320,7 @@
     height: 30vh;
   }
 
-  #home__body__search__advicetext{
-    height: 7rem;
+  .home__body__search__advicetext{
+    font-size: smaller;
   }
 }

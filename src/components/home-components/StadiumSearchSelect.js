@@ -3,6 +3,8 @@ import Select from "react-select";
 import "../../css/home.css";
 
 export default function StadiumSearchSelect(props) {
+  const { stadiums } = props;
+
   const [listOptions, setListOptions] = useState([]);
   const [value, setValue] = useState(0);
   const [stadiumName, setStadiumName] = useState("");
@@ -12,7 +14,7 @@ export default function StadiumSearchSelect(props) {
 
   useEffect(() => {
     fillOptions();
-  }, []);
+  }, [stadiums]);
 
   useEffect(() => {
     props.onSelectStadium(value, stadiumName);
@@ -20,7 +22,7 @@ export default function StadiumSearchSelect(props) {
 
   const fillOptions = () => {
     let array_options = [];
-    props.stadiums.map((stadium) => {
+    stadiums.map((stadium) => {
       array_options.push({
         value: stadium.stadium_id,
         label: stadium.stadium_name,
