@@ -1,5 +1,6 @@
 :root{
   --bg-color:rgb(255, 255, 255);
+  --bg-color-dark:rgb(38, 38, 65);
   --bg-color-transparent:rgba(255, 255, 255,0.7);
   --nav-color:rgb(20, 20, 43);
   --nav-enterprise-color:#d6c7b5;

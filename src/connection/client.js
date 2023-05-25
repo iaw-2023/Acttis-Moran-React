@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const server_path = "https://acttis-moran-laravel-pdib.vercel.app/restapi/";
+const server_path = "https://acttis-moran-laravel-pdib.vearcel.app/restapi/";
 
 export default axios.create({
   baseURL: server_path,
@@ -8,7 +8,7 @@ export default axios.create({
 });
 
 export const handleResponse = (response) => {
-  return response.data.data;
+  return response;
 };
 
 export const handleError = (error) => {
@@ -24,4 +24,6 @@ export const handleError = (error) => {
     // Ocurrió un error al realizar la solicitud
     console.log("Error al realizar la solicitud:", error.message);
   }
+
+  return error;
 };
