@@ -9,7 +9,7 @@
   
   .home__top {
     width: 100%;
-    height: 50vh;
+    height: 28rem;
   }
   
   .home__body {
@@ -276,6 +276,11 @@
 
 
 @media screen and (max-width: 900px) {
+
+  .home__top{
+    height: 20rem;
+  }
+
   .home__body__search__body {
     flex-direction: column;
   }
