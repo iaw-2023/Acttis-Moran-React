@@ -21,7 +21,7 @@ export default function MatchgameBuyTickets() {
   const { cart, setCart } = useContext(CartContext);
 
   const [actualZone, setActualZone] = useState([]);
-  const [selectedTicket, setSelectedTicket] = useState([]);
+  const [selectedTicket, setSelectedTicket] = useState(0);
   const [quantity, setQuantity] = useState(1);
 
   const [matchTickets, setMatchTickets] = useState([]);
@@ -49,12 +49,18 @@ export default function MatchgameBuyTickets() {
 
   const addToCart = () => {
     let updatedCart = [];
-    const existsTicket = cart.find(
-      (ticket) => ticket.ticket_id === selectedTicket.ticket_id
+
+    const ticketToAdd = matchTickets.find(
+      (ticket) => ticket.ticket_id == selectedTicket
     );
+
+    const existsTicket = cart.find(
+      (ticket) => ticket.ticket_id === ticketToAdd.ticket_id
+    );
+
     if (existsTicket) {
       cart.map((ticket) => {
-        if (ticket.ticket_id === selectedTicket.ticket_id) {
+        if (ticket.ticket_id === ticketToAdd.ticket_id) {
           updatedCart.push({
             ...ticket,
             quantity: parseInt(ticket.quantity) + parseInt(quantity),
@@ -70,16 +76,16 @@ export default function MatchgameBuyTickets() {
           matchgame.team_one.team.team_name +
           " vs " +
           matchgame.team_two.team.team_name,
-        stadium: selectedTicket.zone.stadium.stadium_name,
+        stadium: ticketToAdd.zone.stadium.stadium_name,
         date: matchgame.played_on_date,
         time: matchgame.played_on_time,
-        zone: selectedTicket.zone.stadium_location,
-        ticket_id: selectedTicket.ticket_id,
+        zone: ticketToAdd.zone.stadium_location,
+        ticket_id: ticketToAdd.ticket_id,
         quantity: quantity,
-        category: selectedTicket.category,
+        category: ticketToAdd.category,
         price:
-          parseInt(selectedTicket.base_price) +
-          parseInt(selectedTicket.zone.price_addition),
+          parseInt(ticketToAdd.base_price) +
+          parseInt(ticketToAdd.zone.price_addition),
       });
     }
     setCart(updatedCart);
@@ -90,7 +96,7 @@ export default function MatchgameBuyTickets() {
   const showZoneInfo = (zone_code) => {
     const zone = getZoneByZoneCode(zone_code);
     setActualZone(zone);
-    setSelectedTicket([]);
+    setSelectedTicket(0);
   };
 
   const getZoneByZoneCode = (zone_code) => {
@@ -102,10 +108,7 @@ export default function MatchgameBuyTickets() {
   };
 
   const selectTicket = (ticket_id) => {
-    const ticketClicked = matchTickets.find(
-      (ticket) => ticket.ticket_id == ticket_id
-    );
-    setSelectedTicket(ticketClicked);
+    setSelectedTicket(ticket_id);
   };
 
   const handleChangeQuantity = (e) => {
@@ -134,23 +137,21 @@ export default function MatchgameBuyTickets() {
               }}
             />
             <div className="ticket_info">
-              <div className="ticket-info-data">
-                <ZoneTickets
-                  id="ticket_list"
-                  actualZone={actualZone}
-                  matchgameTickets={matchTickets}
-                  onSelectTicket={(ticket_id) => {
-                    selectTicket(ticket_id);
-                  }}
-                ></ZoneTickets>
-              </div>
+              <ZoneTickets
+                id="ticket_list"
+                actualZone={actualZone}
+                matchgameTickets={matchTickets}
+                onSelectTicket={(ticket_id) => {
+                  selectTicket(ticket_id);
+                }}
+              ></ZoneTickets>
             </div>
           </div>
           <div className="ticket-info-quantity-button__container">
             <button
               className="ticket-info-button__button"
               onClick={() => {
-                if (selectedTicket == null || quantity <= 0) {
+                if (selectedTicket === 0 || quantity <= 0) {
                   toast.error(
                     "Need to choose a valid ticket and quantity greater than 0."
                   );

@@ -27,31 +27,33 @@ export default function ZoneTickets(props) {
   }, [ticketSelected]);
 
   return (
-    <ul className="ticket-info-data-ticketlist">
-      {zoneTickets.length == 0 ? (
-        <span className="ticket-info-data-ticketlist-error-text">
-          No tickets
-        </span>
-      ) : (
-        zoneTickets.map((ticket) => {
-          return (
-            <Ticket
-              key={ticket.ticket_id}
-              ticket_id={ticket.ticket_id}
-              ticketSelected={ticketSelected}
-              zone={ticket.zone.stadium_location}
-              category={ticket.category}
-              total_price={
-                parseInt(ticket.base_price) +
-                parseInt(ticket.zone.price_addition)
-              }
-              onSelectTicket={(ticket_id) => {
-                setTicketSelected(ticket_id);
-              }}
-            />
-          );
-        })
-      )}
-    </ul>
+    <div className="ticket-info-data">
+      <ul className="ticket-info-data-ticketlist">
+        {zoneTickets.length == 0 ? (
+          <span className="ticket-info-data-ticketlist-error-text">
+            No tickets
+          </span>
+        ) : (
+          zoneTickets.map((ticket) => {
+            return (
+              <Ticket
+                key={ticket.ticket_id}
+                ticket_id={ticket.ticket_id}
+                ticketSelected={ticketSelected}
+                zone={ticket.zone.stadium_location}
+                category={ticket.category}
+                total_price={
+                  parseInt(ticket.base_price) +
+                  parseInt(ticket.zone.price_addition)
+                }
+                onSelectTicket={(ticket_id) => {
+                  setTicketSelected(ticket_id);
+                }}
+              />
+            );
+          })
+        )}
+      </ul>
+    </div>
   );
 }
