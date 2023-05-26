@@ -150,9 +150,9 @@ export default function MatchgameBuyTickets() {
             <button
               className="ticket-info-button__button"
               onClick={() => {
-                if (selectedTicket.length == 0 || quantity <= 0) {
+                if (selectedTicket == null || quantity <= 0) {
                   toast.error(
-                    "Need to select a ticket and a quantity greater than 0."
+                    "Need to choose a valid ticket and quantity greater than 0."
                   );
                 } else addToCart();
               }}
