@@ -32,3 +32,10 @@ export const getStadiumZones = async (stadiumId) => {
     .then(handleResponse)
     .catch(handleError);
 };
+
+export const getMatchesBy = async (filterParams) => {
+  return axios
+    .get("matchgame/matchesby" + filterParams)
+    .then(handleResponse)
+    .catch(handleError);
+};
