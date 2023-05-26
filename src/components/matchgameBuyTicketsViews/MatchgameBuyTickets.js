@@ -50,15 +50,11 @@ export default function MatchgameBuyTickets() {
   const addToCart = () => {
     let updatedCart = [];
 
-    const ticketToAdd = matchTickets.find(
-      (ticket) => ticket.ticket_id == selectedTicket
-    );
-
-    const existsTicket = cart.find(
-      (ticket) => ticket.ticket_id === ticketToAdd.ticket_id
-    );
+    const ticketToAdd = getSelectedTicketInfo();
+    const existsTicket = isTicketAlreadyInCart(ticketToAdd);
 
     if (existsTicket) {
+      //Only increase quantity
       cart.map((ticket) => {
         if (ticket.ticket_id === ticketToAdd.ticket_id) {
           updatedCart.push({
@@ -68,6 +64,7 @@ export default function MatchgameBuyTickets() {
         } else updatedCart.push(ticket);
       });
     } else {
+      //Add new ticket
       cart.map((ticket) => {
         updatedCart.push(ticket);
       });
@@ -88,9 +85,19 @@ export default function MatchgameBuyTickets() {
           parseInt(ticketToAdd.zone.price_addition),
       });
     }
+
     setCart(updatedCart);
+
     setQuantity(0);
     toast.success("Ticket succesfully added to the cart!");
+  };
+
+  const getSelectedTicketInfo = () => {
+    return matchTickets.find((ticket) => ticket.ticket_id == selectedTicket);
+  };
+
+  const isTicketAlreadyInCart = (ticketToAdd) => {
+    return cart.find((ticket) => ticket.ticket_id === ticketToAdd.ticket_id);
   };
 
   const showZoneInfo = (zone_code) => {
