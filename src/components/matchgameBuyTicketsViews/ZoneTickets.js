@@ -9,10 +9,11 @@ export default function ZoneTickets(props) {
 
   const getZoneTickets = () => {
     let zoneTickets = [];
-    matchgameTickets.map((ticket) => {
-      if (ticket.zone.zone_code == actualZone.zone_code)
-        zoneTickets.push(ticket);
-    });
+    if (matchgameTickets !== null && actualZone !== null)
+      matchgameTickets.map((ticket) => {
+        if (ticket.zone.zone_code == actualZone.zone_code)
+          zoneTickets.push(ticket);
+      });
 
     setZoneTickets(zoneTickets);
   };

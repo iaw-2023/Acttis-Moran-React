@@ -9,9 +9,12 @@ export default function ZoneAdviceText(props) {
   const { actualZone } = props;
 
   useEffect(() => {
-    setAdviceText(
-      "Now choose your specific ticket of " + actualZone.stadium_location + "!"
-    );
+    if (actualZone !== null)
+      setAdviceText(
+        "Now choose your specific ticket of " +
+          actualZone.stadium_location +
+          "!"
+      );
   }, [actualZone]);
 
   return (

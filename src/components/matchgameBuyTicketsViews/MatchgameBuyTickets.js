@@ -20,26 +20,29 @@ export default function MatchgameBuyTickets() {
   const stadium_id = state.stadium_id;
   const { cart, setCart } = useContext(CartContext);
 
-  const [actualZone, setActualZone] = useState([]);
+  const [actualZone, setActualZone] = useState(null);
   const [selectedTicket, setSelectedTicket] = useState(0);
   const [quantity, setQuantity] = useState(0);
 
-  const [matchTickets, setMatchTickets] = useState([]);
-  const [stadiumZones, setStadiumZones] = useState([]);
-  const [matchgame, setMatchgame] = useState([]);
+  const [matchTickets, setMatchTickets] = useState(null);
+  const [stadiumZones, setStadiumZones] = useState(null);
+  const [matchgame, setMatchgame] = useState(null);
 
   const getStartupData = async () => {
     const matchgameResponse = await getMatchgame(matchgame_id);
     if (matchgameResponse.status === 200)
       setMatchgame(matchgameResponse?.data?.data);
+    else toast.error("Error getting information about matchgame.");
 
     const matchTicketsResponse = await getMatchTickets(matchgame_id);
     if (matchTicketsResponse.status === 200)
       setMatchTickets(matchTicketsResponse?.data?.data);
+    else toast.error("Error getting information about matchgame tickets.");
 
     const stadiumZonesResponse = await getStadiumZones(stadium_id);
     if (stadiumZonesResponse.status === 200)
       setStadiumZones(stadiumZonesResponse?.data?.data);
+    else toast.error("Error getting information about stadium zones.");
   };
 
   useEffect(() => {
@@ -49,56 +52,64 @@ export default function MatchgameBuyTickets() {
 
   const addToCart = () => {
     let updatedCart = [];
-
     const ticketToAdd = getSelectedTicketInfo();
-    const existsTicketInCart = isTicketAlreadyInCart(ticketToAdd);
 
-    if (existsTicketInCart) {
-      //Only increase quantity of the ticketToAdd
-      cart.map((ticket) => {
-        if (ticket.ticket_id === ticketToAdd.ticket_id) {
-          updatedCart.push({
-            ...ticket,
-            quantity: parseInt(ticket.quantity) + parseInt(quantity),
-          });
-        } else updatedCart.push(ticket);
+    if (ticketToAdd !== null) {
+      const existsTicketInCart = isTicketAlreadyInCart(ticketToAdd);
 
-        return 0;
-      });
-    } else {
-      //Add all existing tickets
-      cart.map((ticket) => {
-        updatedCart.push(ticket);
-        return 0;
-      });
+      if (existsTicketInCart) {
+        //Only increase quantity of the ticketToAdd
+        cart.map((ticket) => {
+          if (ticket.ticket_id === ticketToAdd.ticket_id) {
+            updatedCart.push({
+              ...ticket,
+              quantity: parseInt(ticket.quantity) + parseInt(quantity),
+            });
+          } else updatedCart.push(ticket);
 
-      //Now push the new ticket
-      updatedCart.push({
-        matchgame:
-          matchgame.team_one.team.team_name +
-          " vs " +
-          matchgame.team_two.team.team_name,
-        stadium: ticketToAdd.zone.stadium.stadium_name,
-        date: matchgame.played_on_date,
-        time: matchgame.played_on_time,
-        zone: ticketToAdd.zone.stadium_location,
-        ticket_id: ticketToAdd.ticket_id,
-        quantity: quantity,
-        category: ticketToAdd.category,
-        price:
-          parseInt(ticketToAdd.base_price) +
-          parseInt(ticketToAdd.zone.price_addition),
-      });
+          return 0;
+        });
+      } else {
+        //Add all existing tickets
+        cart.map((ticket) => {
+          updatedCart.push(ticket);
+          return 0;
+        });
+
+        //Now push the new ticket
+        updatedCart.push({
+          matchgame:
+            matchgame.team_one.team.team_name +
+            " vs " +
+            matchgame.team_two.team.team_name,
+          stadium: ticketToAdd.zone.stadium.stadium_name,
+          date: matchgame.played_on_date,
+          time: matchgame.played_on_time,
+          zone: ticketToAdd.zone.stadium_location,
+          ticket_id: ticketToAdd.ticket_id,
+          quantity: quantity,
+          category: ticketToAdd.category,
+          price:
+            parseInt(ticketToAdd.base_price) +
+            parseInt(ticketToAdd.zone.price_addition),
+        });
+      }
+
+      setCart(updatedCart);
+
+      setQuantity(0);
+      toast.success("Ticket succesfully added to the cart!");
     }
-
-    setCart(updatedCart);
-
-    setQuantity(0);
-    toast.success("Ticket succesfully added to the cart!");
   };
 
   const getSelectedTicketInfo = () => {
-    return matchTickets.find((ticket) => ticket.ticket_id === selectedTicket);
+    let ticket = null;
+    if (matchTickets !== null)
+      ticket = matchTickets.find(
+        (ticket) => ticket.ticket_id === selectedTicket
+      );
+
+    return ticket;
   };
 
   const isTicketAlreadyInCart = (ticketToAdd) => {
@@ -107,16 +118,16 @@ export default function MatchgameBuyTickets() {
 
   const showZoneInfo = (zone_code) => {
     const zone = getZoneByZoneCode(zone_code);
-    setActualZone(zone);
+    if (zone !== null) setActualZone(zone);
     setSelectedTicket(0);
   };
 
   const getZoneByZoneCode = (zone_code) => {
-    const stadiumZone = stadiumZones.find(
-      (zone) => zone.zone_code === zone_code
-    );
+    let zone = null;
+    if (stadiumZones !== null)
+      zone = stadiumZones.find((zone) => zone.zone_code === zone_code);
 
-    return stadiumZone;
+    return zone;
   };
 
   const selectTicket = (ticket_id) => {
@@ -172,7 +183,6 @@ export default function MatchgameBuyTickets() {
             >
               Add to cart
             </button>
-
             <input
               type="number"
               className="ticket_info_data_item__input"
