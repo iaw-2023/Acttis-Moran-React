@@ -22,7 +22,7 @@ export default function MatchgameBuyTickets() {
 
   const [actualZone, setActualZone] = useState([]);
   const [selectedTicket, setSelectedTicket] = useState(0);
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState(0);
 
   const [matchTickets, setMatchTickets] = useState([]);
   const [stadiumZones, setStadiumZones] = useState([]);
@@ -30,15 +30,15 @@ export default function MatchgameBuyTickets() {
 
   const getStartupData = async () => {
     const matchgameResponse = await getMatchgame(matchgame_id);
-    if (matchgameResponse.status == 200)
+    if (matchgameResponse.status === 200)
       setMatchgame(matchgameResponse?.data?.data);
 
     const matchTicketsResponse = await getMatchTickets(matchgame_id);
-    if (matchTicketsResponse.status == 200)
+    if (matchTicketsResponse.status === 200)
       setMatchTickets(matchTicketsResponse?.data?.data);
 
     const stadiumZonesResponse = await getStadiumZones(stadium_id);
-    if (stadiumZonesResponse.status == 200)
+    if (stadiumZonesResponse.status === 200)
       setStadiumZones(stadiumZonesResponse?.data?.data);
   };
 
@@ -51,10 +51,10 @@ export default function MatchgameBuyTickets() {
     let updatedCart = [];
 
     const ticketToAdd = getSelectedTicketInfo();
-    const existsTicket = isTicketAlreadyInCart(ticketToAdd);
+    const existsTicketInCart = isTicketAlreadyInCart(ticketToAdd);
 
-    if (existsTicket) {
-      //Only increase quantity
+    if (existsTicketInCart) {
+      //Only increase quantity of the ticketToAdd
       cart.map((ticket) => {
         if (ticket.ticket_id === ticketToAdd.ticket_id) {
           updatedCart.push({
@@ -62,12 +62,17 @@ export default function MatchgameBuyTickets() {
             quantity: parseInt(ticket.quantity) + parseInt(quantity),
           });
         } else updatedCart.push(ticket);
+
+        return 0;
       });
     } else {
-      //Add new ticket
+      //Add all existing tickets
       cart.map((ticket) => {
         updatedCart.push(ticket);
+        return 0;
       });
+
+      //Now push the new ticket
       updatedCart.push({
         matchgame:
           matchgame.team_one.team.team_name +
@@ -93,7 +98,7 @@ export default function MatchgameBuyTickets() {
   };
 
   const getSelectedTicketInfo = () => {
-    return matchTickets.find((ticket) => ticket.ticket_id == selectedTicket);
+    return matchTickets.find((ticket) => ticket.ticket_id === selectedTicket);
   };
 
   const isTicketAlreadyInCart = (ticketToAdd) => {
@@ -108,7 +113,7 @@ export default function MatchgameBuyTickets() {
 
   const getZoneByZoneCode = (zone_code) => {
     const stadiumZone = stadiumZones.find(
-      (zone) => zone.zone_code == zone_code
+      (zone) => zone.zone_code === zone_code
     );
 
     return stadiumZone;
