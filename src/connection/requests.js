@@ -39,3 +39,10 @@ export const getMatchesBy = async (filterParams) => {
     .then(handleResponse)
     .catch(handleError);
 };
+
+export const postCheckout = async (cartData) => {
+  return axios
+    .post("order/checkout", JSON.stringify(cartData))
+    .then(handleResponse)
+    .catch(handleError);
+};
