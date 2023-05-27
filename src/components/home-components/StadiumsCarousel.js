@@ -1,8 +1,8 @@
 import React from "react";
 import { Carousel } from "react-bootstrap";
-import "../../css/carrousel.css";
+import "../../css/carousel.css";
 
-export default function Carrousel() {
+export default function StadiumsCarousel() {
   const slides = [
     { url: "/images/carrousel-images/camp-nou.jpg" },
     { url: "/images/carrousel-images/allianz-arena.jpg" },
