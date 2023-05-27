@@ -5,7 +5,7 @@ import StadiumSearchSelect from "./StadiumSearchSelect";
 import TeamSearchSelect from "./TeamSearchSelect";
 import { getStadiums, getTeams } from "../../connection/requests";
 import HomeAdviceText from "./HomeAdviceText";
-import Carrousel from "./Carrousel";
+import Carousel from "./Carousel";
 
 export default function Home() {
   const [listStadiums, setListStadiums] = useState([]);
@@ -55,7 +55,7 @@ export default function Home() {
   return (
     <div className="home__section">
       <div className="home__top">
-        <Carrousel />
+        <Carousel />
       </div>
       <div className="home__body">
         <div className="home__body__search">
