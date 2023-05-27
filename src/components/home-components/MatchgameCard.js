@@ -1,10 +1,12 @@
 import { MDBCardBody, MDBCardTitle } from "mdb-react-ui-kit";
+import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
 const stadiumPhotosPath = "/images/stadium_photos/";
 const teamLogosPath = "/images/team_logos/";
 
 export default function MatchgameCard(props) {
+  const navigate = useNavigate();
   const { stadiumName, homeTeamName, awayTeamName, date, time } = props;
 
   return (
@@ -52,7 +54,16 @@ export default function MatchgameCard(props) {
           {date} | {time}
         </span>
         <div className="matchgame-card__button_container">
-          <button className="matchgame-card__button">Buy Tickets</button>
+          <button
+            className="matchgame-card__button"
+            onClick={() => {
+              navigate("/matchgamebuytickets", {
+                state: { matchgame_id: props.id, stadium_id: props.stadiumId },
+              });
+            }}
+          >
+            Buy Tickets
+          </button>
         </div>
       </MDBCardBody>
     </motion.div>
