@@ -6,13 +6,12 @@ import { useContext, useEffect, useState } from "react";
 import CartContext from "../../context/CartProvider";
 
 export default function PageWrapper(props) {
-
-  const { cart, setCart } = useContext(CartContext);
+  const { cart } = useContext(CartContext);
   const [cartInfoItems, setCartInfoItems] = useState(cart.length);
 
   useEffect(() => {
     setCartInfoItems(cart.length);
-    }, [cart]);
+  }, [cart]);
 
   return (
     <div className="page__container">
@@ -37,7 +36,7 @@ export default function PageWrapper(props) {
               </li>
             </ul>
           </div>
-          <Link className="page__wrapper__navbar__cart" to="/">
+          <Link className="page__wrapper__navbar__cart" to="/cart">
             <MDBIcon
               className="page_wrapper__navbar__cart__icon"
               fas
