@@ -32,7 +32,8 @@
     height: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
+    justify-content: center;
+    align-items: center;
 }
 
 .cart__checkout__text__price{
@@ -40,7 +41,7 @@
 }
 
 .cart__checkout__button {
-    width: 40%;
+    width: 90%;
     height: 60%;
     text-align: center;
     font-weight: 800;
