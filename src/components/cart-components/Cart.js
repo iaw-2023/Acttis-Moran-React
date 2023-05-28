@@ -78,7 +78,10 @@ export default function Cart() {
                 <MDBCardBody className="p-4">
                   <MDBRow>
                     <MDBCol className="cart-container__section__content" lg="7">
-                      <MDBTypography tag="h5">
+                      <MDBTypography
+                        className="cart__container__section__back"
+                        tag="h5"
+                      >
                         <Link to="/" className="text-body">
                           <MDBIcon fas icon="long-arrow-alt-left me-2" />{" "}
                           Continue shopping
