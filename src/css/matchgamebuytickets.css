@@ -16,8 +16,18 @@
 
 .matchgametickets__ticket__selection__back{
   position: absolute;
-  left: 12%;
-  top:11%;
+  font-family: 'Poppins', sans-serif;
+  left: 10%;
+  top:15%;
+}
+
+.text-body {
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.text-body:hover {
+  
 }
 
 .matchgametickets__ticket__selection__container{
@@ -28,7 +38,7 @@
   border: solid rgb(177, 177, 177) 1px;
   background-color: var(--bg-color);
   border-radius: 5px;
-  margin-top: 5rem;
+  margin-top: 10rem;
   margin-bottom: 5rem;
   justify-content:space-evenly;
   align-items:center;
@@ -227,10 +237,14 @@
   background-size: cover;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1000px) {
   .matchgametickets__ticket__selection__container{
     flex-direction: column;
     width: 90%;
+  }
+
+  .matchgametickets__ticket__selection__back{
+    font-size: small;
   }
 
   .matchgametickets__stadium__container{
@@ -240,15 +254,15 @@
   }
 
   .matchgametickets__stadium__container__info{
-    width: 20rem;
+    width: 90%;
     height : 10rem;
     margin-bottom: 2rem;
   }
 
   .matchgametickets__stadium__container__info__local-team-logo,
   .matchgametickets__stadium__container__info__away-team-logo{
-    width: 3rem;
-    height: 3rem;
+    width: 6rem;
+    height: 6rem;
   }
 
   .matchgametickets__stadium__container__info__text{
@@ -271,5 +285,17 @@
 
   .ticket-info-quantity-button__container{
     flex-direction: column-reverse;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .matchgametickets__stadium__container__info__local-team-logo,
+  .matchgametickets__stadium__container__info__away-team-logo{
+    width: 3rem;
+    height: 3rem;
+  }
+
+  .matchgametickets__stadium__container__info__text{
+    font-size: 0.7rem;
   }
 }
