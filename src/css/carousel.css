@@ -11,12 +11,14 @@
 .carrousel-container-item-title{
     font-family: 'Poppins', sans-serif;
     font-weight: 800;
-    color: var(--nav-color);
+    color: var(--nav-enterprise-color);
+    text-shadow: black 0 0 2px;
 }
 
 .carrousel-container-item-text{
     font-family: 'Poppins', sans-serif;
-    color: var(--nav-color);
+    text-shadow: black 0 0 2px;
+    color: var(--nav-enterprise-color);
 }
 
 @media screen and (max-width: 900px) {

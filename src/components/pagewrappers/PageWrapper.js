@@ -18,6 +18,7 @@ export default function PageWrapper(props) {
   }, [cart]);
 
   useEffect(() => {
+    setNavStyle(styleNavBarTransparent);
     window.addEventListener("scroll", listenToScroll);
     return () => window.removeEventListener("scroll", listenToScroll);
   }, []);
