@@ -72,7 +72,7 @@ export default function PageWrapper(props) {
               </li>
             </ul>
           </div>
-          <Link className="page__wrapper__navbar__cart" to="/">
+          <Link className="page__wrapper__navbar__cart" to="/cart">
             <MDBIcon
               className="page_wrapper__navbar__cart__icon"
               fas
