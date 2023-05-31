@@ -37,8 +37,10 @@ export default function Ticket(props) {
       className="ticket_info_data_item d-flex justify-content-between align-items-start"
     >
       <div className="ticket_info_data_item_body ms-2 me-auto">
-        <div className="fw-bold">{props.zone}</div>
-        <span>
+        <div className="ticket_info_data_item_body_text fw-bold">
+          {props.zone}
+        </div>
+        <span className="ticket_info_data_item_body_text">
           <i>{props.category}</i>
         </span>
         <span className="ticket_info_data_item_body_price">

@@ -4,6 +4,7 @@ import PageFooter from "./PageFooter";
 import { MDBIcon } from "mdb-react-ui-kit";
 import { useContext, useEffect, useState } from "react";
 import CartContext from "../../context/CartProvider";
+import { useLocation } from "react-router-dom";
 
 export default function PageWrapper(props) {
   const { cart, setCart } = useContext(CartContext);
@@ -24,7 +25,7 @@ export default function PageWrapper(props) {
   }, []);
 
   const listenToScroll = () => {
-    if (window.pageYOffset === 0) {
+    if (window.pageYOffset <= 50) {
       setNavStyle(styleNavBarTransparent);
     } else {
       setNavStyle(styleNavBarSolid);
