@@ -38,7 +38,6 @@ export default function PageWrapper(props) {
 
   const styleNavBarTransparent = {
     backgroundColor: cssVariables.getPropertyValue("--nav-color-transparent"),
-    height: "4.5rem",
   };
 
   const styleNavBarSolid = {
