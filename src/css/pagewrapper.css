@@ -120,14 +120,13 @@
   }
 
 .home__nav__cart__icon__info{
-  margin-top: 4.2vh;
+  margin-top: 35px;
   margin-left: 30px;
-  position: fixed;
+  position: absolute;
   text-align: center;
   font-size: 62%;
   font-weight: 800;
   color: var(--bg-color-transparent);
-  z-index: 100;
   width: 1rem;
   height: 1rem;
   border-radius: 100% 100%;
