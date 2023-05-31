@@ -7,7 +7,7 @@
 .matchgametickets__ticket__selection{
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
+  justify-content: center;
   
   align-items: center;
   width: 100%;
@@ -15,10 +15,14 @@
 }
 
 .matchgametickets__ticket__selection__back{
-  position: absolute;
+  width: 80%;
+  height: 1rem;
+  margin-top: 8rem;
+}
+
+.matchgametickets__ticket__selection__back__link{
   font-family: 'Poppins', sans-serif;
-  left: 10%;
-  top:13%;
+  font-size: 1rem;
 }
 
 .text-body {
@@ -38,7 +42,7 @@
   border: solid rgb(177, 177, 177) 1px;
   background-color: var(--bg-color);
   border-radius: 5px;
-  margin-top: 10rem;
+  margin-top: 1rem;
   margin-bottom: 5rem;
   justify-content:space-evenly;
   align-items:center;
@@ -187,8 +191,13 @@
   flex-direction: column;
 }
 
+.ticket_info_data_item_body_text{
+  font-size: 0.8rem;
+}
+
 .ticket_info_data_item_body_price{
   color: var(--price-color);
+  font-size: 0.9rem;
 }
 
 .ticket_info_data_item__input{
@@ -243,8 +252,9 @@
     width: 90%;
   }
 
-  .matchgametickets__ticket__selection__back{
-    font-size: small;
+
+  .matchgametickets__ticket__selection__back__link{
+    font-size: 0.8rem;
   }
 
   .matchgametickets__stadium__container{

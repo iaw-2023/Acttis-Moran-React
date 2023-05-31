@@ -44,12 +44,16 @@ export default function CartItems() {
                       alt="Shopping item"
                     />
                   </div>
-                  <div className="ms-3">
-                    <MDBTypography tag="h5">{ticket.zone}</MDBTypography>
+                  <div className="ms-3 cart__item__text">
+                    <MDBTypography className="cart__item__title" tag="h6">
+                      {ticket.zone}
+                    </MDBTypography>
                     <p className="small mb-0">
                       <i>{ticket.category}</i>
                     </p>
-                    <p className="small mb-0">{ticket.matchgame}</p>
+                    <p className="cart__item__teams small mb-0">
+                      {ticket.matchgame}
+                    </p>
                     <p className="small mb-0">
                       {ticket.date + " | " + ticket.time}
                     </p>
@@ -57,12 +61,12 @@ export default function CartItems() {
                 </div>
                 <div className="d-flex flex-row align-items-center cart__item__part">
                   <div style={{ width: "50px" }}>
-                    <MDBTypography tag="h5" className="fw-normal mb-0">
+                    <MDBTypography tag="h6" className="fw-normal mb-0">
                       {ticket.quantity}
                     </MDBTypography>
                   </div>
                   <div style={{ width: "80px" }}>
-                    <MDBTypography tag="h5" className="mb-0">
+                    <MDBTypography tag="h6" className="mb-0 cart__item__price">
                       {"$" + ticket.price}
                     </MDBTypography>
                   </div>

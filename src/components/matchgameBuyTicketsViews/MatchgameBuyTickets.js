@@ -142,14 +142,17 @@ export default function MatchgameBuyTickets() {
     <div className="section__matchgametickets__ticket__selection">
       <Toaster position="bottom-center" reverseOrder={false}></Toaster>
       <div className="matchgametickets__ticket__selection">
-        <MDBTypography
-          tag="h5"
-          className="matchgametickets__ticket__selection__back"
-        >
-          <Link to="/" className="text-body">
-            <MDBIcon fas icon="long-arrow-alt-left me-2" /> Continue shopping
-          </Link>
-        </MDBTypography>
+        <div className="matchgametickets__ticket__selection__back">
+          <MDBTypography
+            tag="h5"
+            className="matchgametickets__ticket__selection__back__link"
+          >
+            <Link to="/" className="text-body">
+              <MDBIcon fas icon="long-arrow-alt-left me-2" /> Continue shopping
+            </Link>
+          </MDBTypography>
+        </div>
+
         <div className="matchgametickets__ticket__selection__container">
           <MatchgameInfo matchgame={matchgame} />
           <ZoneAdviceText actualZone={actualZone} />

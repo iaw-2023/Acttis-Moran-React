@@ -27,6 +27,23 @@
     
 }
 
+.cart__item__title{
+    font-family: 'Poppins', sans-serif;
+    font-size: 0.9rem;
+}
+
+.cart__item__teams{
+    font-weight: 600;
+}
+
+.cart__item__text{
+    font-size: 0.9rem;
+}
+
+.cart__item__price{
+    color: var(--price-color);
+}
+
 .cart__client__details__icon{
     color: var(--text-color);
 }
