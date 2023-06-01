@@ -96,7 +96,11 @@ export default function Cart() {
                           </p>
                         </div>
                       </div>
-                      <CartItems />
+                      <CartItems
+                        onChangeTotalPrice={(totalPrice) => {
+                          setTotalPrice(totalPrice);
+                        }}
+                      />
                     </MDBCol>
                     <MDBCol lg="5" className="">
                       <MDBCard className="text-white rounded-3">

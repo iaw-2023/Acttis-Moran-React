@@ -1,5 +1,5 @@
 import CartContext from "../../context/CartProvider";
-import {useContext, useEffect, useState} from "react";
+import { useContext, useEffect, useState } from "react";
 import CartRemoveTicketButton from "./CartRemoveTicketButton";
 import {
   MDBCard,
@@ -8,7 +8,7 @@ import {
   MDBCardImage,
 } from "mdb-react-ui-kit";
 import { toast } from "react-hot-toast";
-import {getCartTicket} from "../../connection/requests";
+import { getCartTicket } from "../../connection/requests";
 
 const stadiumPhotosPath = "/images/stadium_photos/";
 
@@ -16,9 +16,9 @@ export default function CartItems() {
   const { cart, setCart } = useContext(CartContext);
   const [ticketList, setTicketList] = useState([]);
 
-  useEffect(()=>{
+  useEffect(() => {
     obtainCartTicketInfo();
-  },[])
+  }, []);
 
   const obtainCartTicketInfo = async () => {
     const retreiveCartTickets = {
@@ -30,20 +30,24 @@ export default function CartItems() {
       });
     });
     const responseTicketsInfo = await getCartTicket(retreiveCartTickets);
-    if(responseTicketsInfo.status === 200)
+    if (responseTicketsInfo.status === 200)
       matchTicketsWithQuantity(responseTicketsInfo.data.data);
     else toast.error("Error fetching the tickets.");
-
   };
 
   const matchTicketsWithQuantity = (ticketsInfo) => {
     const updatedTickets = [];
     ticketsInfo.map((ticket) => {
-      let cartTicket = cart.find((cartTicket) => cartTicket.ticket_id === ticket.ticket_id);
-      updatedTickets.push({ticketInfo: ticket, quantity: cartTicket.quantity});
+      let cartTicket = cart.find(
+        (cartTicket) => cartTicket.ticket_id === ticket.ticket_id
+      );
+      updatedTickets.push({
+        ticketInfo: ticket,
+        quantity: cartTicket.quantity,
+      });
     });
     setTicketList(updatedTickets);
-  }
+  };
 
   const removeTicketFromCart = (ticketIdRemove) => {
     let updatedCart = [];
@@ -55,7 +59,7 @@ export default function CartItems() {
     });
 
     ticketList.map((ticket) => {
-      if(ticket.ticketInfo.ticket_id !== ticketIdRemove)
+      if (ticket.ticketInfo.ticket_id !== ticketIdRemove)
         updatedTicketList.push(ticket);
     });
 
@@ -63,6 +67,23 @@ export default function CartItems() {
     setTicketList(updatedTicketList);
 
     toast.error("Ticket removed from cart.");
+  };
+
+  useEffect(() => {
+    props.onChangeTotalPrice(getTotalPrice());
+  }, [ticketList]);
+
+  const getTotalPrice = () => {
+    let totalPrice = 0;
+    ticketList.map(
+      (ticket) =>
+        (totalPrice +=
+          (ticket.ticketInfo.base_price +
+            ticket.ticketInfo.zone.price_addition) *
+          ticket.quantity)
+    );
+
+    return totalPrice;
   };
 
   return (
@@ -75,7 +96,11 @@ export default function CartItems() {
                 <div className="d-flex flex-row align-items-center cart__item__part">
                   <div>
                     <MDBCardImage
-                      src={stadiumPhotosPath + ticket.ticketInfo.matchgame.stadium.stadium_name + ".jpg"}
+                      src={
+                        stadiumPhotosPath +
+                        ticket.ticketInfo.matchgame.stadium.stadium_name +
+                        ".jpg"
+                      }
                       fluid
                       className="rounded-3"
                       style={{ width: "65px" }}
@@ -90,10 +115,13 @@ export default function CartItems() {
                       <i>{ticket.ticketInfo.category}</i>
                     </p>
                     <p className="cart__item__teams small mb-0">
-                      {ticket.ticketInfo.matchgame.team_one.team.team_name } vs { ticket.ticketInfo.matchgame.team_two.team.team_name }
+                      {ticket.ticketInfo.matchgame.team_one.team.team_name} vs{" "}
+                      {ticket.ticketInfo.matchgame.team_two.team.team_name}
                     </p>
                     <p className="small mb-0">
-                      {ticket.ticketInfo.matchgame.played_on_date + " | " + ticket.ticketInfo.matchgame.played_on_time}
+                      {ticket.ticketInfo.matchgame.played_on_date +
+                        " | " +
+                        ticket.ticketInfo.matchgame.played_on_time}
                     </p>
                   </div>
                 </div>
@@ -105,7 +133,9 @@ export default function CartItems() {
                   </div>
                   <div style={{ width: "80px" }}>
                     <MDBTypography tag="h6" className="mb-0 cart__item__price">
-                      {"$" + (parseInt(ticket.ticketInfo.base_price) + parseInt(ticket.ticketInfo.zone.price_addition) )}
+                      {"$" +
+                        (parseInt(ticket.ticketInfo.base_price) +
+                          parseInt(ticket.ticketInfo.zone.price_addition))}
                     </MDBTypography>
                   </div>
                   <CartRemoveTicketButton
