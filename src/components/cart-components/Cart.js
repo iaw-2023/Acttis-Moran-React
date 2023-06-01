@@ -26,19 +26,6 @@ export default function Cart() {
     window.scrollTo(0, 0);
   }, []);
 
-  useEffect(() => {
-    obtainTotalPrice();
-  }, [cart]);
-
-  const obtainTotalPrice = () => {
-    let acummulatedPrice = 0;
-    cart.map((ticket) => {
-      acummulatedPrice += parseInt(ticket.price) * parseInt(ticket.quantity);
-    });
-
-    setTotalPrice(acummulatedPrice);
-  };
-
   const handleChange = (e) => {
     setClientEmail(e.target.value);
   };
@@ -55,16 +42,19 @@ export default function Cart() {
       });
     });
 
-    const responseCheckout = await postCheckout(retreiveCartTickets);
-
-    if (responseCheckout.status === 200) {
-      setCart([]);
-      toast.success("The order has been succesfully made!");
-    } else
-      toast.error(
-        "The next error has ocurred while making checkout : " +
-          responseCheckout.response.data.error
-      );
+    toast.promise(postCheckout(retreiveCartTickets), {
+      loading: "Making Checkout...",
+      success: () => {
+        setCart([]);
+        return (
+          <b>
+            The order has been succesfully made, an email has been sent to you
+            with the order information!
+          </b>
+        );
+      },
+      error: <b>There was an error while making checkout!</b>,
+    });
   };
 
   return (
