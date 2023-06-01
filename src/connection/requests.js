@@ -46,3 +46,11 @@ export const postCheckout = async (cartData) => {
     .then(handleResponse)
     .catch(handleError);
 };
+
+
+export const getCartTicket = async (cartData) => {
+  return axios
+      .post("/ticket/carttickets", JSON.stringify(cartData))
+      .then(handleResponse)
+      .catch(handleError);
+};

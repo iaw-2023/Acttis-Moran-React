@@ -5,6 +5,7 @@ export default function CartRemoveTicketButton(props) {
     <button
       style={{ border: "none", color: "#cecece" }}
       onClick={() => {
+          console.log(props.ticket_id)
         props.onClick(props.ticket_id);
       }}
     >
