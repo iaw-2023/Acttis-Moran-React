@@ -7,7 +7,7 @@ export default function MatchgameInfo(props) {
     <div className="matchgametickets__stadium__container__info">
       {matchgame === null ? (
         <div className="matchgametickets__stadium__container__info__text">
-          Invalid Matchgame
+          Loading Matchgame Information...
         </div>
       ) : (
         <>

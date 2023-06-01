@@ -17,8 +17,13 @@ export default function CartItems(props) {
   const [ticketList, setTicketList] = useState([]);
 
   useEffect(() => {
-    obtainCartTicketInfo();
+    if (cart.length !== 0) obtainCartTicketInfo();
   }, []);
+
+  useEffect(() => {
+    // When the checkout is made
+    if (cart.length === 0) setTicketList([]);
+  }, [cart]);
 
   const obtainCartTicketInfo = async () => {
     const retreiveCartTickets = {
