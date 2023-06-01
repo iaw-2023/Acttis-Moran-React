@@ -12,7 +12,7 @@ import { getCartTicket } from "../../connection/requests";
 
 const stadiumPhotosPath = "/images/stadium_photos/";
 
-export default function CartItems() {
+export default function CartItems(props) {
   const { cart, setCart } = useContext(CartContext);
   const [ticketList, setTicketList] = useState([]);
 
@@ -78,9 +78,9 @@ export default function CartItems() {
     ticketList.map(
       (ticket) =>
         (totalPrice +=
-          (ticket.ticketInfo.base_price +
-            ticket.ticketInfo.zone.price_addition) *
-          ticket.quantity)
+          (parseInt(ticket.ticketInfo.base_price) +
+            parseInt(ticket.ticketInfo.zone.price_addition)) *
+          parseInt(ticket.quantity))
     );
 
     return totalPrice;
