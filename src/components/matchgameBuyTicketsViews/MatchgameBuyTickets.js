@@ -52,15 +52,12 @@ export default function MatchgameBuyTickets() {
 
   const addToCart = () => {
     let updatedCart = [];
-    const ticketToAdd = getSelectedTicketInfo();
+    if (selectedTicket !== 0) {
 
-    if (ticketToAdd !== null) {
-      const existsTicketInCart = isTicketAlreadyInCart(ticketToAdd);
-
-      if (existsTicketInCart) {
+      if (isTicketAlreadyInCart(selectedTicket)) {
         //Only increase quantity of the ticketToAdd
         cart.map((ticket) => {
-          if (ticket.ticket_id === ticketToAdd.ticket_id) {
+          if (ticket.ticket_id === selectedTicket) {
             updatedCart.push({
               ...ticket,
               quantity: parseInt(ticket.quantity) + parseInt(quantity),
@@ -78,20 +75,8 @@ export default function MatchgameBuyTickets() {
 
         //Now push the new ticket
         updatedCart.push({
-          matchgame:
-            matchgame.team_one.team.team_name +
-            " vs " +
-            matchgame.team_two.team.team_name,
-          stadium: ticketToAdd.zone.stadium.stadium_name,
-          date: matchgame.played_on_date,
-          time: matchgame.played_on_time,
-          zone: ticketToAdd.zone.stadium_location,
-          ticket_id: ticketToAdd.ticket_id,
-          quantity: quantity,
-          category: ticketToAdd.category,
-          price:
-            parseInt(ticketToAdd.base_price) +
-            parseInt(ticketToAdd.zone.price_addition),
+          ticket_id: selectedTicket,
+          quantity: quantity
         });
       }
 
@@ -102,18 +87,9 @@ export default function MatchgameBuyTickets() {
     }
   };
 
-  const getSelectedTicketInfo = () => {
-    let ticket = null;
-    if (matchTickets !== null)
-      ticket = matchTickets.find(
-        (ticket) => ticket.ticket_id === selectedTicket
-      );
 
-    return ticket;
-  };
-
-  const isTicketAlreadyInCart = (ticketToAdd) => {
-    return cart.find((ticket) => ticket.ticket_id === ticketToAdd.ticket_id);
+  const isTicketAlreadyInCart = () => {
+    return cart.find((ticket) => ticket.ticket_id === selectedTicket);
   };
 
   const showZoneInfo = (zone_code) => {
