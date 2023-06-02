@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import CartContext from "../../context/CartProvider";
 import "../../css/cart.css";
 import { Link } from "react-router-dom";
@@ -21,6 +21,10 @@ export default function Cart() {
 
   const [totalPrice, setTotalPrice] = useState(0);
   const [clientEmail, setClientEmail] = useState("");
+
+  const [checkoutDisabled, setCheckoutDisabled] = useState(false);
+
+  const toastId = useRef(null);
 
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -46,6 +50,7 @@ export default function Cart() {
       loading: "Making Checkout...",
       success: () => {
         setCart([]);
+        setCheckoutDisabled(false);
         return (
           <b>
             The order has been succesfully made, an email has been sent to you
@@ -53,7 +58,10 @@ export default function Cart() {
           </b>
         );
       },
-      error: <b>There was an error while making checkout!</b>,
+      error: () => {
+        setCheckoutDisabled(false);
+        return <b>There was an error while making checkout!</b>;
+      },
     });
   };
 
@@ -130,7 +138,9 @@ export default function Cart() {
                           </div>
                           <div className="cart__checkout__container">
                             <button
+                              disabled={checkoutDisabled}
                               onClick={() => {
+                                setCheckoutDisabled(true);
                                 makeCheckout();
                               }}
                               className="cart__checkout__button"
