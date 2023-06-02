@@ -64,13 +64,7 @@ export default function PageWrapper(props) {
               </Link>
             </div>
 
-            <ul className="page__wrapper__navbar__list">
-              <li className="page__wrapper__navbar__list__item">
-                <span className="page__wrapper__navbar__list__item__text">
-                  Contact
-                </span>
-              </li>
-            </ul>
+            <ul className="page__wrapper__navbar__list"></ul>
           </div>
           <Link className="page__wrapper__navbar__cart" to="/cart">
             <MDBIcon
