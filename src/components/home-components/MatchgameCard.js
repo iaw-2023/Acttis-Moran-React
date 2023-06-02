@@ -66,7 +66,7 @@ export default function MatchgameCard(props) {
               });
             }}
           >
-            Buy Tickets
+            Choose Tickets!
           </button>
         </div>
       </MDBCardBody>
