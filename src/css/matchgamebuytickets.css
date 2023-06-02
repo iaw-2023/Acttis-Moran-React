@@ -68,6 +68,7 @@
 .matchgametickets__stadium__container__info{
   width: 60rem;
   height: 90%;
+  margin-top: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -76,6 +77,9 @@
 .matchgametickets__stadium__container__info__logo-container{
   width: 8rem;
   height: 8rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .matchgametickets__stadium__container__info__local-team-logo,
@@ -92,7 +96,7 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  margin-top: 5rem;
+  margin-top: 1rem;
   padding: 1rem;
   align-items: center;
 }
@@ -232,7 +236,7 @@
   margin-top: 1rem;
   margin-bottom: 1rem;
   font-family: 'Poppins', sans-serif;
-  color:var(--text-color);
+  color:var(--nav-enterprise-color);
   background-color:var(--nav-color);
   transition: background 0.5s;
 }
@@ -247,7 +251,7 @@
   background-size: cover;
 }
 
-@media screen and (max-width: 900px) {
+@media screen and (max-width: 1000px) {
   .matchgametickets__ticket__selection__container{
     flex-direction: column;
     width: 90%;
@@ -307,8 +311,8 @@
 @media screen and (max-width: 550px) {
   .matchgametickets__stadium__container__info__local-team-logo,
   .matchgametickets__stadium__container__info__away-team-logo{
-    width: 3rem;
-    height: 3rem;
+    width: 4rem;
+    height: 4rem;
   }
 
   .matchgametickets__stadium__container__info__text{

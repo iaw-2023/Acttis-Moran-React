@@ -43,12 +43,16 @@ export default function MatchgameCard(props) {
       <MDBCardBody className="matchgame-card__body">
         <div className="matchgame-card__title__container">
           <MDBCardTitle className="matchgame-card__title">
-            {homeTeamName + " vs " + awayTeamName}
+            {homeTeamName}
+          </MDBCardTitle>
+          <MDBCardTitle className="matchgame-card__title">vs</MDBCardTitle>
+          <MDBCardTitle className="matchgame-card__title">
+            {awayTeamName}
           </MDBCardTitle>
         </div>
         <span className="matchgame-card__text">
-          Partido disputado entre {homeTeamName} y {awayTeamName} en el estadio{" "}
-          {stadiumName}.
+          Matchgame played between {homeTeamName} and {awayTeamName} in{" "}
+          {stadiumName} stadium.
         </span>
         <span className="matchgame-card__text-datetime">
           {date} | {time}

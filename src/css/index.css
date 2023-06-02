@@ -4,10 +4,12 @@
   --bg-color-transparent:rgba(255, 255, 255,0.7);
   --nav-color:rgb(20, 20, 43);
   --nav-enterprise-color:#d6c7b5;
+  --nav-enterprise-color-transparent:rgba(214, 199, 181, 0.4);
   --notification-color:rgba(216, 57, 57, 0.7);
   --notification-light-color:rgba(235, 168, 168, 0.7);
   --nav-color-transparent:rgba(20, 20, 43, 0.5);
   --price-color:rgb(71, 165, 71);
+  --price-color-light:rgb(151, 223, 151);
   --text-color:white;
   --button-color:#a2a2cc;
   --stadium-color:rgb(20, 20, 43);
