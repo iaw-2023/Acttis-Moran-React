@@ -218,11 +218,20 @@
     align-self: center;
     text-align: center;
     margin-top: 10px;
+    margin-bottom: 0.4rem;
+    padding-bottom: 0.5rem;
+    border-bottom: var(--nav-enterprise-color-transparent) 1px solid;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   
   .matchgame-card__title{
     color: var(--nav-enterprise-color);
-    font-size: 15px;
+    font-size: 0.9rem;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
   }
   
   .matchgame-card__body{
@@ -240,7 +249,7 @@
     text-align: center;
     align-self: center;
     color:var(--text-color);
-    height: 40%;
+    height: 45%;
     width: 80%;
   }
 
@@ -251,7 +260,8 @@
     text-align: center;
     align-self: center;
     color:var(--text-color);
-    height: 20%;
+    margin-top: 0.2rem;
+    height: 15%;
     width: 80%;
   }
   
@@ -266,10 +276,10 @@
     background-color: var(--button-color);
     align-self: center;
     width: 100%;
-    height: 80%;
+    height: 90%;
     border: none;
     font-family: 'Poppins', sans-serif;
-    font-weight: 800;
+    font-weight: 600;
     border-radius: 15px;
     transition: background-color 0.2s;
   }

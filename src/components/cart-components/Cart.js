@@ -146,7 +146,7 @@ export default function Cart() {
                               className="cart__checkout__button"
                             >
                               <span className="cart__checkout__button__text">
-                                CheckOut
+                                Buy Tickets
                               </span>
                             </button>
                           </div>
