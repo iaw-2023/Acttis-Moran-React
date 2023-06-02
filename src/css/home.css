@@ -137,11 +137,13 @@
 
   .home__body__results {
     display: flex;
+    margin-top: 1rem;
     width: 85%;
     height: 100%;
     align-self: center;
     justify-content: center;
     flex-wrap: wrap;
+    gap: 1rem;
   }
 
   .home__body__results__text{
@@ -162,9 +164,6 @@
   }
 
   .matchgame-card {
-    margin-left:1rem;
-    margin-top: 0.5rem;
-    margin-bottom: 0.5rem;
     display: flex;
     flex-direction: column;
     font-family: 'Poppins', sans-serif;
