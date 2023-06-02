@@ -6,6 +6,7 @@ import TeamSearchSelect from "./TeamSearchSelect";
 import { getStadiums, getTeams } from "../../connection/requests";
 import HomeAdviceText from "./HomeAdviceText";
 import StadiumsCarousel from "./StadiumsCarousel";
+import { Toaster, toast } from "react-hot-toast";
 
 export default function Home() {
   const [listStadiums, setListStadiums] = useState([]);
@@ -23,19 +24,23 @@ export default function Home() {
   }, []);
 
   const getStartupData = async () => {
-    const stadiumsResponse = await getStadiums();
-    if (stadiumsResponse.status == 200) {
-      setListStadiums(stadiumsResponse.data.data);
-    } else {
-      setListStadiums([]);
-    }
+    getStadiums()
+      .then((stadiumsResponse) => {
+        setListStadiums(stadiumsResponse.data.data);
+      })
+      .catch((error) => {
+        setListStadiums([]);
+        toast.error("There was a problem loading Stadiums");
+      });
 
-    const teamsResponse = await getTeams();
-    if (teamsResponse.status == 200) {
-      setListTeams(teamsResponse.data.data);
-    } else {
-      setListTeams([]);
-    }
+    getTeams()
+      .then((teamsResponse) => {
+        setListTeams(teamsResponse.data.data);
+      })
+      .catch((error) => {
+        setListTeams([]);
+        toast.error("There was a problem loading Teams");
+      });
   };
 
   const handleChangeOnDate = (e) => {
@@ -54,6 +59,7 @@ export default function Home() {
 
   return (
     <div className="home__section">
+      <Toaster position="bottom-center" reverseOrder={false}></Toaster>
       <div className="home__top">
         <StadiumsCarousel />
       </div>

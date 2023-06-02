@@ -8,7 +8,7 @@ import {
   MDBCardImage,
 } from "mdb-react-ui-kit";
 import { toast } from "react-hot-toast";
-import { getCartTicket } from "../../connection/requests";
+import { getCartTickets } from "../../connection/requests";
 
 const stadiumPhotosPath = "/images/stadium_photos/";
 
@@ -34,10 +34,14 @@ export default function CartItems(props) {
         ticketId: ticket.ticket_id,
       });
     });
-    const responseTicketsInfo = await getCartTicket(retreiveCartTickets);
-    if (responseTicketsInfo.status === 200)
-      matchTicketsWithQuantity(responseTicketsInfo.data.data);
-    else toast.error("Error fetching the tickets.");
+
+    getCartTickets(retreiveCartTickets)
+      .then((responseTicketsInfo) => {
+        matchTicketsWithQuantity(responseTicketsInfo.data.data);
+      })
+      .catch((error) => {
+        toast.error("Error fetching the tickets.");
+      });
   };
 
   const matchTicketsWithQuantity = (ticketsInfo) => {

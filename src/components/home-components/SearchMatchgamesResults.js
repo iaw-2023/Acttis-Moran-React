@@ -23,7 +23,11 @@ export default function SearchMatchgamesResults(props) {
     let response = [];
 
     if (filtersOff()) {
-      response = await getExampleMatches();
+      getExampleMatches()
+        .then((matchgamesResponse) => {
+          setListMatchgames(matchgamesResponse.data.data);
+        })
+        .catch(() => setListMatchgames([]));
     } else {
       let filterParams = "?";
       let teamFilter =
@@ -39,13 +43,11 @@ export default function SearchMatchgamesResults(props) {
 
       filterParams += teamFilter + stadiumFilter + dateFilter;
 
-      response = await getMatchesBy(filterParams);
-    }
-
-    if (response.status == 200) {
-      setListMatchgames(response.data.data);
-    } else {
-      setListMatchgames([]);
+      getMatchesBy(filterParams)
+        .then((matchgamesResponse) => {
+          setListMatchgames(matchgamesResponse.data.data);
+        })
+        .catch(() => setListMatchgames([]));
     }
   };
 

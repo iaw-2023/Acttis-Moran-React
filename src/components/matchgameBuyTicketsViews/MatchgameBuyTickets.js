@@ -29,20 +29,29 @@ export default function MatchgameBuyTickets() {
   const [matchgame, setMatchgame] = useState(null);
 
   const getStartupData = async () => {
-    const matchgameResponse = await getMatchgame(matchgame_id);
-    if (matchgameResponse.status === 200)
-      setMatchgame(matchgameResponse?.data?.data);
-    else toast.error("Error getting information about matchgame.");
+    getMatchgame(matchgame_id)
+      .then((matchgameResponse) => {
+        setMatchgame(matchgameResponse.data.data);
+      })
+      .catch((error) => {
+        toast.error("Error getting information about matchgame.");
+      });
 
-    const matchTicketsResponse = await getMatchTickets(matchgame_id);
-    if (matchTicketsResponse.status === 200)
-      setMatchTickets(matchTicketsResponse?.data?.data);
-    else toast.error("Error getting information about matchgame tickets.");
+    getMatchTickets(matchgame_id)
+      .then((matchTicketsResponse) => {
+        setMatchTickets(matchTicketsResponse.data.data);
+      })
+      .catch((error) => {
+        toast.error("Error getting information about matchgame tickets.");
+      });
 
-    const stadiumZonesResponse = await getStadiumZones(stadium_id);
-    if (stadiumZonesResponse.status === 200)
-      setStadiumZones(stadiumZonesResponse?.data?.data);
-    else toast.error("Error getting information about stadium zones.");
+    getStadiumZones(stadium_id)
+      .then((stadiumZonesResponse) => {
+        setStadiumZones(stadiumZonesResponse.data.data);
+      })
+      .catch((error) => {
+        toast.error("Error getting information about stadium zones.");
+      });
   };
 
   useEffect(() => {
@@ -53,7 +62,6 @@ export default function MatchgameBuyTickets() {
   const addToCart = () => {
     let updatedCart = [];
     if (selectedTicket !== 0) {
-
       if (isTicketAlreadyInCart(selectedTicket)) {
         //Only increase quantity of the ticketToAdd
         cart.map((ticket) => {
@@ -76,7 +84,7 @@ export default function MatchgameBuyTickets() {
         //Now push the new ticket
         updatedCart.push({
           ticket_id: selectedTicket,
-          quantity: quantity
+          quantity: quantity,
         });
       }
 
@@ -86,7 +94,6 @@ export default function MatchgameBuyTickets() {
       toast.success("Ticket succesfully added to the cart!");
     }
   };
-
 
   const isTicketAlreadyInCart = () => {
     return cart.find((ticket) => ticket.ticket_id === selectedTicket);

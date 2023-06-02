@@ -1,56 +1,37 @@
-import axios, { handleError, handleResponse } from "./client";
+import axios from "./client";
 
 export const getExampleMatches = async () => {
-  return axios.get("matchgame/example").then(handleResponse).catch(handleError);
+  return axios.get("matchgame/example");
 };
 
 export const getStadiums = async () => {
-  return axios.get("stadium/index").then(handleResponse).catch(handleError);
+  return axios.get("stadium/index");
 };
 
 export const getTeams = async () => {
-  return axios.get("team/index").then(handleResponse).catch(handleError);
+  return axios.get("team/index");
 };
 
 export const getMatchgame = async (matchgameId) => {
-  return axios
-    .get("matchgame/show/" + matchgameId)
-    .then(handleResponse)
-    .catch(handleError);
+  return axios.get("matchgame/show/" + matchgameId);
 };
 
 export const getMatchTickets = async (matchgameId) => {
-  return axios
-    .get("ticket/matchtickets/" + matchgameId)
-    .then(handleResponse)
-    .catch(handleError);
+  return axios.get("ticket/matchtickets/" + matchgameId);
 };
 
 export const getStadiumZones = async (stadiumId) => {
-  return axios
-    .get("zone/stadiumzones/" + stadiumId)
-    .then(handleResponse)
-    .catch(handleError);
+  return axios.get("zone/stadiumzones/" + stadiumId);
 };
 
 export const getMatchesBy = async (filterParams) => {
-  return axios
-    .get("matchgame/matchesby" + filterParams)
-    .then(handleResponse)
-    .catch(handleError);
+  return axios.get("matchgame/matchesby" + filterParams);
 };
 
 export const postCheckout = async (cartData) => {
-  return axios
-    .post("order/checkout", JSON.stringify(cartData))
-    .then(handleResponse)
-    .catch(handleError);
+  return axios.post("order/checkout", JSON.stringify(cartData));
 };
 
-
-export const getCartTicket = async (cartData) => {
-  return axios
-      .post("/ticket/carttickets", JSON.stringify(cartData))
-      .then(handleResponse)
-      .catch(handleError);
+export const getCartTickets = async (cartData) => {
+  return axios.post("/ticket/carttickets", JSON.stringify(cartData));
 };
