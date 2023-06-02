@@ -78,20 +78,19 @@
     border-radius: 5px;
     margin-top: 2rem;
     border: none;
-    background-color: var(--price-color-light);
+    background-color: var(--nav-enterprise-color);
     transition: background-color 0.5s;
 }
 
 .cart__checkout__button:hover {
-    background-color: var(--hover-color);
+    background-color: var(--price-color-light);
 }
 
 .cart__checkout__button__text{
     font-family: 'Poppins', sans-serif;
-    font-weight: 600;
+    font-weight: 200;
     font-size: 1.3rem;
-    color: var(--text-color);
-    text-shadow: black 0 0 3px;
+    color: var(--nav-color);
 }
 
 .cart__checkout__button__text__price{
