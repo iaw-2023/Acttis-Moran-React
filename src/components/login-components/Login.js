@@ -4,8 +4,6 @@ import useAuth from "../../hooks/useAuth";
 import { logInSubmission } from "../../connection/requests.js";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 
-const LOGIN_URL = "/auth/login/";
-
 function LogIn() {
   const { setAuth } = useAuth();
 
@@ -30,8 +28,8 @@ function LogIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = logInSubmission({ email: email, password: pwd });
-    const accessToken = response.data.data;
+    const response = await logInSubmission({ email: email, password: pwd });
+    const accessToken = response.data.access_token;
 
     setAuth({ email, pwd, accessToken });
     setEmail("");
@@ -54,7 +52,7 @@ function LogIn() {
           <h1>Log In</h1>
           <form className="login-register__form" onSubmit={handleSubmit}>
             <label className="login-register__label" htmlFor="email">
-              Username
+              Email
             </label>
             <input
               type="text"

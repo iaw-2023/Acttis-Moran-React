@@ -9,7 +9,8 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const USER_REGEX = /.+@.+\.[A-Za-z]+$/;
+const EMAIL_REGEX = /.+@.+\.[A-Za-z]+$/;
+const USER_REGEX = /^[A-z][A-z0-9-_]{2,23}$/;
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 
 const Register = () => {
@@ -17,6 +18,8 @@ const Register = () => {
   const errRef = useRef();
 
   const [email, setEmail] = useState("");
+  const [name, setName] = useState("");
+  const [validEmail, setValidEmail] = useState(false);
   const [validName, setValidName] = useState(false);
   const [userFocus, setUserFocus] = useState(false);
 
@@ -36,8 +39,12 @@ const Register = () => {
   }, []);
 
   useEffect(() => {
-    setValidName(USER_REGEX.test(email));
+    setValidEmail(EMAIL_REGEX.test(email));
   }, [email]);
+
+  useEffect(() => {
+    setValidName(USER_REGEX.test(name));
+  }, [name]);
 
   useEffect(() => {
     setValidPwd(PWD_REGEX.test(pwd));
@@ -51,14 +58,18 @@ const Register = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     // if button enabled with JS hack
-    const v1 = USER_REGEX.test(email);
+    const v1 = EMAIL_REGEX.test(email);
     const v2 = PWD_REGEX.test(pwd);
     if (!v1 || !v2) {
       setErrMsg("Invalid Entry");
       return;
     }
 
-    const response = await registerSubmission({ email: email, password: pwd });
+    const response = await registerSubmission({
+      email: email,
+      password: pwd,
+      name: name,
+    });
 
     //Change the register view to show a log-in page button
     setSuccess(true);
@@ -91,24 +102,62 @@ const Register = () => {
             </p>
             <h1>Register</h1>
             <form className="login-register__form" onSubmit={handleSubmit}>
-              <label className="login-register__label" htmlFor="username">
-                Username
+              <label className="login-register__label" htmlFor="email">
+                Email
+                <FontAwesomeIcon
+                  icon={faCheck}
+                  className={validEmail ? "valid" : "hide"}
+                />
+                <FontAwesomeIcon
+                  icon={faTimes}
+                  className={validEmail || !email ? "hide" : "invalid"}
+                />
+              </label>
+              <input
+                type="text"
+                id="email"
+                ref={userRef}
+                autoComplete="off"
+                onChange={(e) => setEmail(e.target.value)}
+                value={email}
+                required
+                aria-invalid={validEmail ? "false" : "true"}
+                aria-describedby="uidnote"
+                onFocus={() => setUserFocus(true)}
+                onBlur={() => setUserFocus(false)}
+              />
+              {/* Information paragraph for typing a valid user */}
+              <p
+                id="uidnote"
+                className={
+                  //If not focused or user is empty(not already try a user) or the actual
+                  //user is valid, not show help.
+                  userFocus && email && !validEmail
+                    ? "email-instructions"
+                    : "offscreen"
+                }
+              >
+                <FontAwesomeIcon icon={faInfoCircle} />
+                Must be a valid email.
+              </p>
+              <label className="login-register__label" htmlFor="name">
+                Your Name
                 <FontAwesomeIcon
                   icon={faCheck}
                   className={validName ? "valid" : "hide"}
                 />
                 <FontAwesomeIcon
                   icon={faTimes}
-                  className={validName || !email ? "hide" : "invalid"}
+                  className={!name ? "hide" : "invalid"}
                 />
               </label>
               <input
                 type="text"
-                id="username"
+                id="name"
                 ref={userRef}
                 autoComplete="off"
-                onChange={(e) => setEmail(e.target.value)}
-                value={email}
+                onChange={(e) => setName(e.target.value)}
+                value={name}
                 required
                 aria-invalid={validName ? "false" : "true"}
                 aria-describedby="uidnote"
@@ -121,13 +170,13 @@ const Register = () => {
                 className={
                   //If not focused or user is empty(not already try a user) or the actual
                   //user is valid, not show help.
-                  userFocus && email && !validName
-                    ? "username-instructions"
+                  userFocus && name && !validName
+                    ? "name-instructions"
                     : "offscreen"
                 }
               >
                 <FontAwesomeIcon icon={faInfoCircle} />
-                Must be a valid email.
+                Must be a valid name.
               </p>
               {/* Password block */}
               <label className="login-register__label" htmlFor="password">

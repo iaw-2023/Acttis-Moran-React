@@ -10,8 +10,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    color: rgb(43, 41, 41);
-    opacity: 80%;
     height: 100%;
     width: 100%;
     flex-grow: 10;
@@ -27,6 +25,12 @@
     max-height: 200vh;
     align-self: center;
     padding: 1rem;
+    background-color: var(--nav-color);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+    border-radius: 10px;
+    box-shadow: black 0 0 10px;
+    color: var(--nav-enterprise-color);
 }
 
 .login-register__form {
@@ -39,12 +43,19 @@
 
 input[type="text"],
 input[type="password"],
-.login-register__submitbutton,
 textarea {
-  font-family: 'Nunito', sans-serif;
+  font-family: 'Poppins', sans-serif;
   font-size: 22px;
   padding: 0.25rem;
   border-radius: 0.5rem;
+}
+
+.login-register__submitbutton{
+    border-radius: 0.5rem;
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    padding: 0.25rem;
+    background-color: var(--nav-enterprise-color);
 }
 
 .login-register__label,
@@ -53,8 +64,8 @@ textarea {
 }
 
 .login-register__label {
-    color: rgb(24, 21, 15);
-    font-family: 'Lato', sans-serif;
+    color: var(--nav-enterprise-color);
+    font-family: 'Poppins', sans-serif;
 }
 
 .login-register__submitbutton {
@@ -63,14 +74,23 @@ textarea {
   transition : background 1s;
 }
 
-.username-instructions {
+.email-instructions {
     font-size: 0.75rem;
     border-radius: 0.5rem;
     background: #000;
     color: #fff;
     padding: 0.25rem;
     position: absolute;
-    margin-top: -4rem;
+    margin-top: -11rem;
+}
+
+.name-instructions {
+    font-size: 0.75rem;
+    border-radius: 0.5rem;
+    background: #000;
+    color: #fff;
+    padding: 0.25rem;
+    position: absolute;
 }
 
 .password-instructions{
@@ -80,7 +100,7 @@ textarea {
     color: #fff;
     padding: 0.25rem;
     position: absolute;
-    margin-top: 7rem;
+    margin-top: 12rem;
 }
 
 .confirmpassword-instructions{
@@ -90,7 +110,7 @@ textarea {
     color: #fff;
     padding: 0.25rem;
     position: absolute;
-    margin-top: 15rem;
+    margin-top: 20rem;
 }
 
 .offscreen {
@@ -131,16 +151,16 @@ textarea {
 .login-register__link,
 .login-register__link:visited,
 .login-register__link:active {
-    color: #000;
+    color: var(--nav-enterprise-color);
     text-decoration: none;
     transition: color 1s;
 }
 .login-register__link:hover {
-    color: rgb(214, 163, 54);
+    color: var(--hover-color);
     transition: color 1s;
 }
 
 .login-register__submitbutton:hover {
-    background-color: rgb(214, 163, 54);
+    background-color: var(--hover-color);
     transition: background 1s;
 }
