@@ -8,6 +8,7 @@ import {
   faInfoCircle,
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { Toaster, toast } from "react-hot-toast";
 
 const EMAIL_REGEX = /.+@.+\.[A-Za-z]+$/;
 const USER_REGEX = /^[A-z][A-z0-9-_]{2,23}$/;
@@ -65,22 +66,38 @@ const Register = () => {
       return;
     }
 
-    const response = await registerSubmission({
-      email: email,
-      password: pwd,
-      name: name,
-    });
-
-    //Change the register view to show a log-in page button
-    setSuccess(true);
-    //clear state and controlled inputs
-    setEmail("");
-    setPwd("");
-    setMatchPwd("");
+    toast.promise(
+      registerSubmission({
+        email: email,
+        password: pwd,
+        name: name,
+      }),
+      {
+        loading: "User registration in progress...",
+        success: (response) => {
+          //Change the register view to show a log-in page button
+          setSuccess(true);
+          //clear state and controlled inputs
+          setEmail("");
+          setPwd("");
+          setMatchPwd("");
+        },
+        error: (error) => {
+          console.log(error);
+          return (
+            <span>
+              The following error happen while trying to make registration :{" "}
+              {error?.response?.data.email}
+            </span>
+          );
+        },
+      }
+    );
   };
 
   return (
     <div className="login-register__container">
+      <Toaster position="bottom-center" reverseOrder={false}></Toaster>
       <div className="login-register__body">
         {success ? (
           <section className="login-register__section">

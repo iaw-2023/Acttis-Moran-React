@@ -19,9 +19,9 @@
 }
 
 .login-register__section {
-    min-width: 20vh;
+    min-width: 30vh;
     max-width: 100vh;
-    min-height: 20vh;
+    min-height: 30vh;
     max-height: 200vh;
     align-self: center;
     padding: 1rem;

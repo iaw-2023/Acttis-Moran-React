@@ -3,6 +3,7 @@ import { useState, useRef, useEffect, useContext } from "react";
 import useAuth from "../../hooks/useAuth";
 import { logInSubmission } from "../../connection/requests.js";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import { Toaster, toast } from "react-hot-toast";
 
 function LogIn() {
   const { setAuth } = useAuth();
@@ -28,18 +29,32 @@ function LogIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const response = await logInSubmission({ email: email, password: pwd });
-    const accessToken = response.data.access_token;
 
-    setAuth({ email, pwd, accessToken });
-    setEmail("");
-    setPwd("");
-    //When logued, navigate to home or where the user wanted to go before where sent to login page
-    navigate(from, { replace: true });
+    toast.promise(logInSubmission({ email: email, password: pwd }), {
+      loading: "Logging in...",
+      success: (response) => {
+        const accessToken = response.data.access_token;
+
+        setAuth({ email, pwd, accessToken });
+        setEmail("");
+        setPwd("");
+        //When logued, navigate to home or where the user wanted to go before where sent to login page
+        navigate(from, { replace: true });
+      },
+      error: (error) => {
+        return (
+          <span>
+            The next error happened while making loggin :{" "}
+            {error.response.data.errors}
+          </span>
+        );
+      },
+    });
   };
 
   return (
     <div className="login-register__container">
+      <Toaster position="bottom-center" reverseOrder={false}></Toaster>
       <div className="login-register__body">
         <section className="login-register__section">
           <p
