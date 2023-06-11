@@ -63,8 +63,6 @@ export default function PageWrapper(props) {
                 ></img>
               </Link>
             </div>
-
-            <ul className="page__wrapper__navbar__list"></ul>
           </div>
           <Link className="page__wrapper__navbar__cart" to="/cart">
             <MDBIcon
@@ -74,6 +72,24 @@ export default function PageWrapper(props) {
             />
             <div className="home__nav__cart__icon__info">{cartInfoItems}</div>
           </Link>
+          <ul className="page__wrapper__navbar__list">
+            <li className="page__wrapper__navbar__list__item">
+              <Link
+                to="/login"
+                className="page__wrapper__navbar__list__item__text"
+              >
+                Login
+              </Link>
+            </li>
+            <li className="page__wrapper__navbar__list__item">
+              <Link
+                to="/register"
+                className="page__wrapper__navbar__list__item__text"
+              >
+                Register
+              </Link>
+            </li>
+          </ul>
         </nav>
       </section>
       {props.children}

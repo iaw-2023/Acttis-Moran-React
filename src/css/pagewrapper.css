@@ -68,7 +68,7 @@
   }
   
   .page__wrapper__navbar__list{
-    width: 70%;
+    width: 30%;
     height: 100%;
     margin : 0;
     display: flex;
@@ -91,6 +91,12 @@
     margin-top: auto;
     margin-bottom: auto;
     text-align: center;
+    text-decoration: none;
+    color: var(--nav-enterprise-color);
+  }
+
+  .page__wrapper__navbar__list__item__text:hover {
+    color: var(--nav-enterprise-color);
   }
   
   .page__wrapper__navbar__list__item:hover {
