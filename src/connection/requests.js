@@ -35,3 +35,11 @@ export const postCheckout = async (cartData) => {
 export const getCartTickets = async (cartData) => {
   return axios.post("/ticket/carttickets", JSON.stringify(cartData));
 };
+
+export const logInSubmission = async (userData) => {
+  return axios.post("/auth/login", JSON.stringify(userData));
+};
+
+export const registerSubmission = async (userData) => {
+  return axios.post("/auth/register", JSON.stringify(userData));
+};

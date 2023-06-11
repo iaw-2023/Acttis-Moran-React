@@ -3,7 +3,11 @@ import "../../css/home.css";
 import SearchMatchgamesResults from "./SearchMatchgamesResults";
 import StadiumSearchSelect from "./StadiumSearchSelect";
 import TeamSearchSelect from "./TeamSearchSelect";
-import { getStadiums, getTeams } from "../../connection/requests";
+import {
+  getStadiums,
+  getTeams,
+  logInSubmission,
+} from "../../connection/requests";
 import HomeAdviceText from "./HomeAdviceText";
 import StadiumsCarousel from "./StadiumsCarousel";
 import { Toaster, toast } from "react-hot-toast";
