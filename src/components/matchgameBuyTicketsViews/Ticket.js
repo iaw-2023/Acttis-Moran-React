@@ -29,14 +29,16 @@ export default function Ticket(props) {
   };
 
   return (
-    <MDBListGroupItem
-      style={selected ? selectedStyle : notSelectedStyle}
+    <div
       onClick={() => {
         setSelected(true);
       }}
-      className="ticket_info_data_item d-flex justify-content-between align-items-start"
+      className="ticket_info_data_item"
     >
-      <div className="ticket_info_data_item_body ms-2 me-auto">
+      <div
+        style={selected ? selectedStyle : notSelectedStyle}
+        className="ticket_info_data_item_body ms-2 me-auto"
+      >
         <div className="ticket_info_data_item_body_text fw-bold">
           {props.zone}
         </div>
@@ -47,6 +49,6 @@ export default function Ticket(props) {
           {"$" + props.total_price}
         </span>
       </div>
-    </MDBListGroupItem>
+    </div>
   );
 }

@@ -6,7 +6,7 @@ import { Link, useNavigate, useLocation } from "react-router-dom";
 import { Toaster, toast } from "react-hot-toast";
 
 function LogIn() {
-  const { setAuth } = useAuth();
+  const { setAuth, logInAuth } = useAuth();
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -21,6 +21,7 @@ function LogIn() {
 
   useEffect(() => {
     userRef.current.focus();
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
@@ -30,26 +31,7 @@ function LogIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    toast.promise(logInSubmission({ email: email, password: pwd }), {
-      loading: "Logging in...",
-      success: (response) => {
-        const accessToken = response.data.access_token;
-
-        setAuth({ email, pwd, accessToken });
-        setEmail("");
-        setPwd("");
-        //When logued, navigate to home or where the user wanted to go before where sent to login page
-        navigate(from, { replace: true });
-      },
-      error: (error) => {
-        return (
-          <span>
-            The next error happened while making loggin :{" "}
-            {error.response.data.errors}
-          </span>
-        );
-      },
-    });
+    logInAuth(email, pwd);
   };
 
   return (

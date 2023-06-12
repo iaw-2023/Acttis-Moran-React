@@ -177,23 +177,26 @@
 }
 
 .ticket_info_data_item{
-  transition: background 0.2s, color 0.2s;
+  width: 100%;
   border-radius: 5px;
   max-height: 6rem;
   color: var(--text-color);
   margin-top: 1rem;
 }
 
-.ticket_info_data_item:hover {
-  background-color: var(--hover-color);
-  color: var(--nav-color);
-}
-
 .ticket_info_data_item_body{
-  width: 80%;
+  width: 90%;
   height: 80%;
   display: flex;
   flex-direction: column;
+  border: var(--transparent) solid 1px;
+  border-radius: 5px;
+  padding: 5px;
+  transition: border 0.2s, background 0.2s, color 0.2s;
+}
+
+.ticket_info_data_item_body:hover {
+  border: var(--nav-enterprise-color) solid 1px;
 }
 
 .ticket_info_data_item_body_text{
@@ -312,8 +315,8 @@
 @media screen and (max-width: 550px) {
   .matchgametickets__stadium__container__info__local-team-logo,
   .matchgametickets__stadium__container__info__away-team-logo{
-    width: 4rem;
-    height: 4rem;
+    width: 3.5rem;
+    height: 3.5rem;
   }
 
   .matchgametickets__stadium__container__info__text{
