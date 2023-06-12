@@ -1,18 +1,26 @@
 import "../../css/pagewrapper.css";
-import { Link } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import PageFooter from "./PageFooter";
 import { MDBIcon } from "mdb-react-ui-kit";
 import { useContext, useEffect, useState } from "react";
 import CartContext from "../../context/CartProvider";
-import { useLocation } from "react-router-dom";
+import useAuth from "../../hooks/useAuth";
+import { logoutSubmission } from "../../connection/requests";
+import { Toaster, toast } from "react-hot-toast";
 
 export default function PageWrapper(props) {
+  const { auth, setAuth } = useAuth();
   const { cart, setCart } = useContext(CartContext);
   const [cartInfoItems, setCartInfoItems] = useState(cart.length);
   const [navStyle, setNavStyle] = useState({});
 
+  const [logoutAccess, setLogoutAccess] = useState([]);
+  const [loginRegisterAccess, setLoginRegisterAccess] = useState([]);
+
   const rootStyle = document.querySelector(":root");
   const cssVariables = getComputedStyle(rootStyle);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     setCartInfoItems(cart.length);
@@ -23,6 +31,67 @@ export default function PageWrapper(props) {
     window.addEventListener("scroll", listenToScroll);
     return () => window.removeEventListener("scroll", listenToScroll);
   }, []);
+
+  useEffect(() => {
+    verifyLoginRegisterAccess();
+    verifyLogoutAccess();
+  }, [auth]);
+
+  const logout = async () => {
+    toast.promise(logoutSubmission(auth?.accessToken), {
+      loading: "Logging out...",
+      success: (response) => {
+        setAuth({});
+        navigate("/");
+
+        return <b>Logged out successfuly.</b>;
+      },
+      error: (error) => {
+        setAuth({});
+        navigate("/");
+        return <span>There was a problem while logging out</span>;
+      },
+    });
+  };
+
+  const verifyLoginRegisterAccess = () => {
+    if (!auth?.accessToken) {
+      setLoginRegisterAccess([
+        <li key={1} className="page__wrapper__navbar__list__item">
+          <Link to="/login" className="page__wrapper__navbar__list__item__text">
+            Login
+          </Link>
+        </li>,
+        <li key={2} className="page__wrapper__navbar__list__item">
+          <Link
+            to="/register"
+            className="page__wrapper__navbar__list__item__text"
+          >
+            Register
+          </Link>
+        </li>,
+      ]);
+    } else {
+      setLoginRegisterAccess([]);
+    }
+  };
+
+  const verifyLogoutAccess = () => {
+    if (auth?.accessToken) {
+      setLogoutAccess([
+        <li key={1} className="page__wrapper__navbar__list__item">
+          <Link
+            className="page__wrapper__navbar__list__item__text"
+            onClick={() => logout()}
+          >
+            Logout
+          </Link>
+        </li>,
+      ]);
+    } else {
+      setLogoutAccess([]);
+    }
+  };
 
   const listenToScroll = () => {
     if (window.pageYOffset <= 50) {
@@ -46,6 +115,7 @@ export default function PageWrapper(props) {
 
   return (
     <div className="page__container">
+      <Toaster position="bottom-center" reverseOrder={false}></Toaster>
       <div id="page__background"></div>
       <section
         style={navStyle}
@@ -73,22 +143,7 @@ export default function PageWrapper(props) {
             <div className="home__nav__cart__icon__info">{cartInfoItems}</div>
           </Link>
           <ul className="page__wrapper__navbar__list">
-            <li className="page__wrapper__navbar__list__item">
-              <Link
-                to="/login"
-                className="page__wrapper__navbar__list__item__text"
-              >
-                Login
-              </Link>
-            </li>
-            <li className="page__wrapper__navbar__list__item">
-              <Link
-                to="/register"
-                className="page__wrapper__navbar__list__item__text"
-              >
-                Register
-              </Link>
-            </li>
+            {loginRegisterAccess},{logoutAccess},
           </ul>
         </nav>
       </section>

@@ -40,6 +40,8 @@ function LogIn() {
         setPwd("");
         //When logued, navigate to home or where the user wanted to go before where sent to login page
         navigate(from, { replace: true });
+
+        return <b>Successfuly logged in!</b>;
       },
       error: (error) => {
         return (

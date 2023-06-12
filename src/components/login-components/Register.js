@@ -81,6 +81,8 @@ const Register = () => {
           setEmail("");
           setPwd("");
           setMatchPwd("");
+
+          return <b>Successfuly registered user!</b>;
         },
         error: (error) => {
           console.log(error);
