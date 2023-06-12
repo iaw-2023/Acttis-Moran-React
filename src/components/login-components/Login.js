@@ -21,6 +21,7 @@ function LogIn() {
 
   useEffect(() => {
     userRef.current.focus();
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {

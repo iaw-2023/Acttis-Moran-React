@@ -121,20 +121,21 @@ export default function PageWrapper(props) {
               </Link>
             </div>
           </div>
-          <Link className="page__wrapper__navbar__cart" to="/cart">
-            <MDBIcon
-              className="page_wrapper__navbar__cart__icon"
-              fas
-              icon="shopping-cart"
-            />
-            <div className="home__nav__cart__icon__info">{cartInfoItems}</div>
-          </Link>
+
           <ul className="page__wrapper__navbar__list">
             {loginRegisterAccess},{logoutAccess},
           </ul>
         </nav>
       </section>
-      {props.children}
+      {props.children},
+      <Link className="page__wrapper__navbar__cart" to="/cart">
+        <MDBIcon
+          className="page_wrapper__navbar__cart__icon"
+          fas
+          icon="shopping-cart"
+        />
+        <div className="home__nav__cart__icon__info">{cartInfoItems}</div>
+      </Link>
       <PageFooter></PageFooter>
     </div>
   );
