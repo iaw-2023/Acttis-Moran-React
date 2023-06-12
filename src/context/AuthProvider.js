@@ -1,6 +1,6 @@
 import { createContext, useState } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
-import { Toaster, toast } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import { logInSubmission, logoutSubmission } from "../connection/requests";
 
 const AuthContext = createContext({});

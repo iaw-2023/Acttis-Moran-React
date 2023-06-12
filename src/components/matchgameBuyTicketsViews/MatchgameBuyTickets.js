@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from "react";
 import { useLocation, Link } from "react-router-dom";
 import "../../css/matchgamebuytickets.css";
 import CartContext from "../../context/CartProvider";
-import { Toaster, toast } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import { MDBIcon, MDBTypography } from "mdb-react-ui-kit";
 import {
   getMatchTickets,
@@ -123,7 +123,6 @@ export default function MatchgameBuyTickets() {
 
   return (
     <div className="section__matchgametickets__ticket__selection">
-      <Toaster position="bottom-center" reverseOrder={false}></Toaster>
       <div className="matchgametickets__ticket__selection">
         <div className="matchgametickets__ticket__selection__back">
           <MDBTypography

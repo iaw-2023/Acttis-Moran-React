@@ -1,16 +1,10 @@
 import "../../css/login-register.css";
 import { useState, useRef, useEffect, useContext } from "react";
 import useAuth from "../../hooks/useAuth";
-import { logInSubmission } from "../../connection/requests.js";
-import { Link, useNavigate, useLocation } from "react-router-dom";
-import { Toaster, toast } from "react-hot-toast";
+import { Link } from "react-router-dom";
 
 function LogIn() {
-  const { setAuth, logInAuth } = useAuth();
-
-  const navigate = useNavigate();
-  const location = useLocation();
-  const from = location.state?.from?.pathname || "/";
+  const { logInAuth } = useAuth();
 
   const userRef = useRef();
   const errorRef = useRef();
@@ -36,7 +30,6 @@ function LogIn() {
 
   return (
     <div className="login-register__container">
-      <Toaster position="bottom-center" reverseOrder={false}></Toaster>
       <div className="login-register__body">
         <section className="login-register__section">
           <p
