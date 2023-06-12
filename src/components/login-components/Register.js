@@ -37,6 +37,7 @@ const Register = () => {
 
   useEffect(() => {
     userRef.current.focus();
+    window.scrollTo(0, 0);
   }, []);
 
   useEffect(() => {
@@ -81,6 +82,8 @@ const Register = () => {
           setEmail("");
           setPwd("");
           setMatchPwd("");
+
+          return <b>Successfuly registered user!</b>;
         },
         error: (error) => {
           console.log(error);

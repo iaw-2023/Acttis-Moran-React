@@ -1,4 +1,5 @@
 import axios from "./client";
+import { axiosAuth } from "./client";
 
 export const getExampleMatches = async () => {
   return axios.get("matchgame/example");
@@ -42,4 +43,8 @@ export const logInSubmission = async (userData) => {
 
 export const registerSubmission = async (userData) => {
   return axios.post("/auth/register", JSON.stringify(userData));
+};
+
+export const logoutSubmission = async (accessToken) => {
+  return axiosAuth(accessToken).post("/auth/logout");
 };
