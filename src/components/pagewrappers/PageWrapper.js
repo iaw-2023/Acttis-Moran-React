@@ -9,7 +9,7 @@ import { logoutSubmission } from "../../connection/requests";
 import { Toaster, toast } from "react-hot-toast";
 
 export default function PageWrapper(props) {
-  const { auth, setAuth } = useAuth();
+  const { auth, setAuth, logOutAuth } = useAuth();
   const { cart, setCart } = useContext(CartContext);
   const [cartInfoItems, setCartInfoItems] = useState(cart.length);
   const [navStyle, setNavStyle] = useState({});
@@ -38,20 +38,7 @@ export default function PageWrapper(props) {
   }, [auth]);
 
   const logout = async () => {
-    toast.promise(logoutSubmission(auth?.accessToken), {
-      loading: "Logging out...",
-      success: (response) => {
-        setAuth({});
-        navigate("/");
-
-        return <b>Logged out successfuly.</b>;
-      },
-      error: (error) => {
-        setAuth({});
-        navigate("/");
-        return <span>There was a problem while logging out</span>;
-      },
-    });
+    logOutAuth();
   };
 
   const verifyLoginRegisterAccess = () => {
