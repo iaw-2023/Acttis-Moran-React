@@ -12,7 +12,7 @@ import {
   MDBRow,
   MDBTypography,
 } from "mdb-react-ui-kit";
-import { Toaster, toast } from "react-hot-toast";
+import { toast } from "react-hot-toast";
 import { postCheckout } from "../../connection/requests";
 import CartItems from "./CartItems";
 
@@ -67,7 +67,6 @@ export default function Cart() {
 
   return (
     <div className="cart-container">
-      <Toaster position="bottom-center" reverseOrder={false} />
       <section className="h-custom cart-container__section">
         <MDBContainer className="py-5 h-100">
           <MDBRow className="justify-content-center h-100">

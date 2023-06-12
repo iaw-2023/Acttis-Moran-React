@@ -5,8 +5,6 @@ import { MDBIcon } from "mdb-react-ui-kit";
 import { useContext, useEffect, useState } from "react";
 import CartContext from "../../context/CartProvider";
 import useAuth from "../../hooks/useAuth";
-import { logoutSubmission } from "../../connection/requests";
-import { Toaster, toast } from "react-hot-toast";
 
 export default function PageWrapper(props) {
   const { auth, setAuth, logOutAuth } = useAuth();
@@ -102,7 +100,6 @@ export default function PageWrapper(props) {
 
   return (
     <div className="page__container">
-      <Toaster position="bottom-center" reverseOrder={false}></Toaster>
       <div id="page__background"></div>
       <section
         style={navStyle}
