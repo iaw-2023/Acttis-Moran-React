@@ -7,12 +7,12 @@ import CartContext from "../../context/CartProvider";
 import useAuth from "../../hooks/useAuth";
 
 export default function PageWrapper(props) {
-  const { auth, setAuth, logOutAuth } = useAuth();
-  const { cart, setCart } = useContext(CartContext);
+  const { auth, logOutAuth } = useAuth();
+  const { cart } = useContext(CartContext);
   const [cartInfoItems, setCartInfoItems] = useState(cart.length);
   const [navStyle, setNavStyle] = useState({});
 
-  const [logoutAccess, setLogoutAccess] = useState([]);
+  const [authUserAccess, setAuthUserAccess] = useState([]);
   const [loginRegisterAccess, setLoginRegisterAccess] = useState([]);
 
   const rootStyle = document.querySelector(":root");
@@ -32,7 +32,7 @@ export default function PageWrapper(props) {
 
   useEffect(() => {
     verifyLoginRegisterAccess();
-    verifyLogoutAccess();
+    verifyAuthUserAccess();
   }, [auth]);
 
   const logout = async () => {
@@ -61,9 +61,9 @@ export default function PageWrapper(props) {
     }
   };
 
-  const verifyLogoutAccess = () => {
+  const verifyAuthUserAccess = () => {
     if (auth?.accessToken) {
-      setLogoutAccess([
+      setAuthUserAccess([
         <li key={1} className="page__wrapper__navbar__list__item">
           <Link
             className="page__wrapper__navbar__list__item__text"
@@ -72,9 +72,17 @@ export default function PageWrapper(props) {
             Logout
           </Link>
         </li>,
+        <li key={2} className="page__wrapper__navbar__list__item">
+          <Link
+            className="page__wrapper__navbar__list__item__text"
+            to="/userorders"
+          >
+            My Orders
+          </Link>
+        </li>,
       ]);
     } else {
-      setLogoutAccess([]);
+      setAuthUserAccess([]);
     }
   };
 
@@ -120,7 +128,7 @@ export default function PageWrapper(props) {
           </div>
 
           <ul className="page__wrapper__navbar__list">
-            {loginRegisterAccess},{logoutAccess},
+            {loginRegisterAccess},{authUserAccess},
           </ul>
         </nav>
       </section>

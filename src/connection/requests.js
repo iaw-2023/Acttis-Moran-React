@@ -48,3 +48,7 @@ export const registerSubmission = async (userData) => {
 export const logoutSubmission = async (accessToken) => {
   return axiosAuth(accessToken).post("/auth/logout");
 };
+
+export const getUserOrders = async (accessToken) => {
+  return axiosAuth(accessToken).post("/order/userorders");
+};

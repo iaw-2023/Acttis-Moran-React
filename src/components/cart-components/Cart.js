@@ -47,7 +47,7 @@ export default function Cart() {
     });
 
     toast.promise(postCheckout(retreiveCartTickets), {
-      loading: "Making Checkout...",
+      loading: "Making Order...",
       success: () => {
         setCart([]);
         setCheckoutDisabled(false);
@@ -145,7 +145,7 @@ export default function Cart() {
                               className="cart__checkout__button"
                             >
                               <span className="cart__checkout__button__text">
-                                Buy Tickets
+                                Make Order!
                               </span>
                             </button>
                           </div>
