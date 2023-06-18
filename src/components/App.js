@@ -6,7 +6,7 @@ import Missing from "./Missing";
 import MatchgameBuyTickets from "./matchgameBuyTicketsViews/MatchgameBuyTickets";
 import Cart from "./cart-components/Cart";
 import RequireAuth from "./login-components/RequireAuth";
-import ClientOrders from "./client-components/ClientOrders";
+import UserOrders from "./user-components/UserOrders";
 import LogIn from "./login-components/Login";
 import Register from "./login-components/Register";
 
@@ -24,7 +24,7 @@ function App() {
 
         {/* Want to protect these routes */}
         <Route element={<RequireAuth />}>
-          <Route path="/clientorders" element={<ClientOrders />} />
+          <Route path="/userorders" element={<UserOrders />} />
         </Route>
 
         {/* Catch all (pages that doesnt exists) */}

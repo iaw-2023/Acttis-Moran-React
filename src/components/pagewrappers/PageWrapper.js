@@ -64,20 +64,20 @@ export default function PageWrapper(props) {
   const verifyAuthUserAccess = () => {
     if (auth?.accessToken) {
       setAuthUserAccess([
-        <li key={1} className="page__wrapper__navbar__list__item">
-          <Link
-            className="page__wrapper__navbar__list__item__text"
-            onClick={() => logout()}
-          >
-            Logout
-          </Link>
-        </li>,
         <li key={2} className="page__wrapper__navbar__list__item">
           <Link
             className="page__wrapper__navbar__list__item__text"
             to="/userorders"
           >
             My Orders
+          </Link>
+        </li>,
+        <li key={1} className="page__wrapper__navbar__list__item">
+          <Link
+            className="page__wrapper__navbar__list__item__text"
+            onClick={() => logout()}
+          >
+            Logout
           </Link>
         </li>,
       ]);

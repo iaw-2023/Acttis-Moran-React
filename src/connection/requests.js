@@ -50,5 +50,5 @@ export const logoutSubmission = async (accessToken) => {
 };
 
 export const getUserOrders = async (accessToken) => {
-  return axiosAuth(accessToken).post("/order/userorders");
+  return axiosAuth(accessToken).get("/order/userorders");
 };

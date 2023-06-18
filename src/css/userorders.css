@@ -1,0 +1,115 @@
+.userorders__container{
+    width: 100%;
+    height: 100%;
+    background-color: var(--bg-color);
+    display: flex;
+    justify-content: center;
+}
+
+.userorders__container__body{
+    width: 90%;
+    min-height: 90vh;
+    border-radius: 10px;
+    border: solid grey 1px;
+    margin-top: 10rem;
+    margin-bottom: 10rem;
+}
+
+.userorders__container__body__results{
+    height: 95%;
+    width: 95%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.userorders__container__body__results__order{
+    width: 30rem;
+    height: 30rem;
+    background-color: var(--nav-color);
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    border-radius: 10px;
+    box-shadow: black 0 0 10px;
+}
+
+.userorders__container__body__results__order__top{
+    height: 25%;
+    width: 95%;
+    background-color: var(--nav-enterprise-color);
+    border-radius: 10px;
+    margin-top: 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.userorders__container__body__results__order__top__text{
+  color: var(--nav-color);
+  font-family: 'Poppins', sans-serif;
+  text-shadow: black 0 0 2px;
+  font-weight: 400;
+}
+
+.userorders__container__body__results__order__ticketdetails-container{
+    width: 95%;
+    height: 50%;
+    overflow-y: scroll;
+    padding: 5px 5px;
+    background-color: var(--nav-color);
+}
+
+.userorders__container__body__results__order__ticketdetails-container__item{
+    height: 10rem;
+    width: 100%;
+    margin-top: 1rem;
+    background-color: var(--nav-color);
+    border-radius: 10px;
+    border: solid var(--nav-enterprise-color) 1px;
+}
+
+.userorders__container__body__results__order__ticketdetails-container__item__body{
+    display: flex;
+    height: 95%;
+    width: 95%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.userorders__container__body__results__order__ticketdetails-container__item__body__text{
+  color: var(--nav-enterprise-color);
+  font-family: 'Poppins', sans-serif;
+  font-weight: 200;
+}
+
+.userorders__container__body__results__order__bottom{
+    width: 95%;
+    height: 15%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.userorders__container__body__results__order__bottom__pay-button{
+    width: 50%;
+    height: 80%;
+    border-radius: 10px;
+    border-style: none;
+    color: var(--nav-color);
+    font-family: 'Poppins', sans-serif;
+    font-weight: 200;
+    background-color: var(--price-color);
+    transition: background 0.2s;
+}
+
+.userorders__container__body__results__order__bottom__pay-button:hover{
+    background-color: var(--hover-color);
+}
