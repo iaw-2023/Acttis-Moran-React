@@ -163,6 +163,10 @@
     text-align: center;
     margin-top: 2rem;
 }
+.mercadopago__container__body{
+    position: absolute !important;
+    max-width: 80%;
+}
 
 @media screen and (max-width: 600px) {
     .userorders__container__body__results__order__ticketdetails-container__item__body__text{
