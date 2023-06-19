@@ -57,7 +57,7 @@ export default function OrderCard(props) {
       </ul>
       <div className="userorders__container__body__results__order__bottom">
         {orderInfo?.state === "unconfirmed" ? (
-          <button className="userorders__container__body__results__order__bottom__pay-button">
+          <button className="userorders__container__body__results__order__bottom__pay-button" onClick={()=>{props.onSelectOrder(orderInfo)}}>
             Pay Order
           </button>
         ) : (
