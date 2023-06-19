@@ -55,3 +55,7 @@ export const logoutSubmission = async (accessToken) => {
 export const getUserOrders = async (accessToken) => {
   return axiosAuth(accessToken).get("/order/userorders");
 };
+
+export const confirmOrder = async (accessToken,orderData) => {
+  return axiosAuth(accessToken).post("/order/confirmorder", JSON.stringify(orderData));
+};

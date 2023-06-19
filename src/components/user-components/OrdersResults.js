@@ -5,24 +5,10 @@ import { toast } from "react-hot-toast";
 import OrderCard from "./OrderCard";
 import { getUserOrders } from "../../connection/requests";
 
-export default function OrdersResults() {
-  const [userOrders, setUserOrders] = useState([]);
+export default function OrdersResults(props) {
   const { auth } = useAuth();
+  const { userOrders } = props;
 
-  useEffect(() => {
-    obtainUserOrders();
-  }, []);
-
-  const obtainUserOrders = async () => {
-    getUserOrders(auth?.accessToken)
-      .then((response) => {
-        setUserOrders(response.data.data);
-      })
-      .catch(() => {
-        setUserOrders([]);
-        toast.error("There was a problem loading user Orders.");
-      });
-  };
   return (
     <>
       <motion.div layout className="userorders__container__body__results">
@@ -34,6 +20,7 @@ export default function OrdersResults() {
                   key={order.order_id}
                   id={order.order_id}
                   orderInfo={order}
+                  onSelectOrder={(order)=>{props.onSelectOrder(order)}}
                 ></OrderCard>
               );
             })
