@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import MatchgameCard from "./MatchgameCard";
 import { getExampleMatches, getMatchesBy } from "../../connection/requests";
 import { motion, AnimatePresence } from "framer-motion";
-import TextTransition, { presets } from "react-text-transition";
 
 export default function SearchMatchgamesResults(props) {
   const [listMatchgames, setListMatchgames] = useState([]);
@@ -20,8 +19,6 @@ export default function SearchMatchgamesResults(props) {
   }, [listMatchgames]);
 
   const retreiveMatchgames = async () => {
-    let response = [];
-
     if (filtersOff()) {
       getExampleMatches()
         .then((matchgamesResponse) => {
