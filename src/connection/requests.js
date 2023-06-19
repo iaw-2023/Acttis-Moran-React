@@ -29,8 +29,11 @@ export const getMatchesBy = async (filterParams) => {
   return axios.get("matchgame/matchesby" + filterParams);
 };
 
-export const postCheckout = async (cartData) => {
-  return axios.post("order/checkout", JSON.stringify(cartData));
+export const postCheckout = async (accessToken, cartData) => {
+  return axiosAuth(accessToken).post(
+    "order/checkout",
+    JSON.stringify(cartData)
+  );
 };
 
 export const getCartTickets = async (cartData) => {
@@ -47,4 +50,8 @@ export const registerSubmission = async (userData) => {
 
 export const logoutSubmission = async (accessToken) => {
   return axiosAuth(accessToken).post("/auth/logout");
+};
+
+export const getUserOrders = async (accessToken) => {
+  return axiosAuth(accessToken).get("/order/userorders");
 };
