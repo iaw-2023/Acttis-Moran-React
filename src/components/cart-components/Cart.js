@@ -103,6 +103,7 @@ export default function Cart() {
                               ${totalPrice}
                             </p>
                           </div>
+                          <hr />
                           <div className="cart__checkout__container">
                             {auth?.accessToken ? (
                               <button
