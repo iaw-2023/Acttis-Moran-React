@@ -166,11 +166,28 @@
 .mercadopago__container__body{
     position: absolute !important;
     max-width: 80%;
+    display: flex;
+    flex-direction: column;
+    top: 10rem;
+}
+
+.mercadopago__container__body__close-button{
+    border-style: none;
+    border-radius: 50%;
+    background-color: var(--nav-color-transparent);
+    height: 2rem;
+    width: 2rem;
+    color: var(--bg-color);
+    transition: background 0.2s;
+}
+
+.mercadopago__container__body__close-button:hover{
+    background-color: var(--nav-color);
 }
 
 @media screen and (max-width: 600px) {
     .userorders__container__body__results__order__ticketdetails-container__item__body__text{
-        font-size: small;
+        font-size: 0.7rem;
     }
 
     .userorders__container__body{
