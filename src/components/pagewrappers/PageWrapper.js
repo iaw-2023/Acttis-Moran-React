@@ -1,7 +1,12 @@
 import "../../css/pagewrapper.css";
-import { useNavigate, Link } from "react-router-dom";
+import { Link } from "react-router-dom";
 import PageFooter from "./PageFooter";
-import { MDBIcon } from "mdb-react-ui-kit";
+import {
+  MDBDropdown,
+  MDBDropdownMenu,
+  MDBDropdownItem,
+  MDBDropdownToggle,
+} from "mdb-react-ui-kit";
 import { useContext, useEffect, useState } from "react";
 import CartContext from "../../context/CartProvider";
 import useAuth from "../../hooks/useAuth";
@@ -12,13 +17,10 @@ export default function PageWrapper(props) {
   const [cartInfoItems, setCartInfoItems] = useState(cart.length);
   const [navStyle, setNavStyle] = useState({});
 
-  const [authUserAccess, setAuthUserAccess] = useState([]);
   const [loginRegisterAccess, setLoginRegisterAccess] = useState([]);
 
   const rootStyle = document.querySelector(":root");
   const cssVariables = getComputedStyle(rootStyle);
-
-  const navigate = useNavigate();
 
   useEffect(() => {
     setCartInfoItems(cart.length);
@@ -32,7 +34,6 @@ export default function PageWrapper(props) {
 
   useEffect(() => {
     verifyLoginRegisterAccess();
-    verifyAuthUserAccess();
   }, [auth]);
 
   const logout = async () => {
@@ -42,47 +43,41 @@ export default function PageWrapper(props) {
   const verifyLoginRegisterAccess = () => {
     if (!auth?.accessToken) {
       setLoginRegisterAccess([
-        <li key={1} className="page__wrapper__navbar__list__item">
-          <Link to="/login" className="page__wrapper__navbar__list__item__text">
-            Login
-          </Link>
-        </li>,
-        <li key={2} className="page__wrapper__navbar__list__item">
+        <div key={1} className="page__wrapper__navbar__list__item-account">
           <Link
-            to="/register"
-            className="page__wrapper__navbar__list__item__text"
+            to="/login"
+            className="page__wrapper__navbar__list__item__account__link"
           >
-            Register
+            <i class="fas fa-user page__wrapper__navbar__list__item-account__icon"></i>
           </Link>
-        </li>,
+        </div>,
       ]);
     } else {
-      setLoginRegisterAccess([]);
-    }
-  };
-
-  const verifyAuthUserAccess = () => {
-    if (auth?.accessToken) {
-      setAuthUserAccess([
-        <li key={2} className="page__wrapper__navbar__list__item">
-          <Link
-            className="page__wrapper__navbar__list__item__text"
-            to="/userorders"
-          >
-            My Orders
-          </Link>
-        </li>,
-        <li key={1} className="page__wrapper__navbar__list__item">
-          <Link
-            className="page__wrapper__navbar__list__item__text"
-            onClick={() => logout()}
-          >
-            Logout
-          </Link>
-        </li>,
+      setLoginRegisterAccess([
+        <MDBDropdown className="page__wrapper__navbar__list__item-account">
+          <MDBDropdownToggle tag="a" className="nav-link" role="button">
+            <i class="fas fa-user-tag page__wrapper__navbar__list__item-account__icon"></i>
+          </MDBDropdownToggle>
+          <MDBDropdownMenu>
+            <MDBDropdownItem className="page__wrapper__navbar__list__item-account__dropdown-item">
+              <Link
+                className="page__wrapper__navbar__list__item-account__dropdown-link"
+                to="/userorders"
+              >
+                My Orders
+              </Link>
+            </MDBDropdownItem>
+            <MDBDropdownItem
+              className="page__wrapper__navbar__list__item-account__dropdown-item"
+              onClick={() => logout()}
+            >
+              <span className="page__wrapper__navbar__list__item-account__dropdown-link-logout">
+                Logout
+              </span>
+            </MDBDropdownItem>
+          </MDBDropdownMenu>
+        </MDBDropdown>,
       ]);
-    } else {
-      setAuthUserAccess([]);
     }
   };
 
@@ -128,20 +123,21 @@ export default function PageWrapper(props) {
           </div>
 
           <ul className="page__wrapper__navbar__list">
-            {loginRegisterAccess},{authUserAccess},
+            <li className="page__wrapper__navbar__list__item__user-block">
+              {loginRegisterAccess}
+              <div className="page__wrapper__navbar__list__item-cart" key={3}>
+                <Link className="page__wrapper__navbar__cart" to="/cart">
+                  <i class="fab fa-opencart page_wrapper__navbar__cart__icon"></i>
+                  <div className="home__nav__cart__icon__info">
+                    {cartInfoItems}
+                  </div>
+                </Link>
+              </div>
+            </li>
           </ul>
         </nav>
       </section>
-      {props.children},
-      <Link className="page__wrapper__navbar__cart" to="/cart">
-        <MDBIcon
-          className="page_wrapper__navbar__cart__icon"
-          fas
-          icon="shopping-cart"
-        />
-        <div className="home__nav__cart__icon__info">{cartInfoItems}</div>
-      </Link>
-      <PageFooter></PageFooter>
+      {props.children},<PageFooter></PageFooter>
     </div>
   );
 }

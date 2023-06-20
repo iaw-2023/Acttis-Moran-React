@@ -35,14 +35,14 @@
     display: flex;
     margin-top: auto;
     margin-bottom: auto;
-    justify-content: space-evenly;
+    justify-content: space-between;
     align-content: center;
   }
   
   .page__wrapper__navbar__container{
     display: flex;
     justify-content: center;
-    width: 50%;
+    width: 20rem;
     height: 100%;
   }
   
@@ -77,13 +77,61 @@
   
   .page__wrapper__navbar__list__item {
     display: flex;
-    width: 5rem;
+    width: 8rem;
     height: 70%;
     list-style-type: none;
     margin-left: 1rem;
     color: var(--nav-enterprise-color);
-    border-radius: 10px;
-    transition: box-shadow 0.2s ease-in-out;
+    
+    transition: border 0.2s ease-in-out;
+  }
+
+  .page__wrapper__navbar__list__item__user-block{
+    display: flex;
+    width: 8rem;
+    height: 70%;
+    list-style-type: none;
+    margin-left: auto;
+    color: var(--nav-enterprise-color);
+  }
+
+  .page__wrapper__navbar__list__item-cart{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+    height: 100%;
+    list-style-type: none;
+
+    color: var(--nav-enterprise-color);
+  }
+
+  .page__wrapper__navbar__list__item-account{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3rem;
+    height: 100%;
+    list-style-type: none;
+    color: var(--nav-enterprise-color);
+
+  }
+
+  .page__wrapper__navbar__list__item__account__link{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+  }
+
+  .page__wrapper__navbar__list__item-account__icon{
+    color: var(--nav-enterprise-color);
+    font-size: 1.4rem;
+    transition: text-shadow 0.2s;
+  }
+
+  .page__wrapper__navbar__list__item-account__icon:hover{
+    text-shadow: var(--nav-enterprise-color) 0 0 10px;
   }
   
   .page__wrapper__navbar__list__item__text {
@@ -101,33 +149,19 @@
   }
   
   .page__wrapper__navbar__list__item:hover {
-    box-shadow: var(--nav-enterprise-color) 0 0 2px;
+    border-left: solid var(--nav-enterprise-color) 1px;
+    border-right: solid var(--nav-enterprise-color) 1px;
   }
   
   .page__wrapper__navbar__cart{
-    width: 4.5rem;
-    height: 4.5rem;
     text-decoration: none;
-    border-radius: 100% 100%;
-    background-color: var(--nav-color-transparent);
     display: flex;
-    position: fixed;
-    box-shadow: black 0 0 5px;
-    z-index: 100;
-    bottom: 2rem;
-    right: 2rem;
     justify-content: center;
     align-items: center;
-    transition: background 0.2s;
-  }
-
-  .page__wrapper__navbar__cart:hover{
-    background-color: var(--nav-color);
   }
   
   .page_wrapper__navbar__cart__icon{
-    margin-top: auto;
-    font-size: 170%;
+    font-size: 1.6rem;
     text-align: center;
     align-self: center;
     color: var(--nav-enterprise-color);
@@ -136,13 +170,13 @@
     transition: text-shadow 0.2s ease-in-out;
   }
   
-  .page__nav__cart__icon:hover{
-    text-shadow: var(--nav-enterprise-color) 0 0 5px;
+  .page_wrapper__navbar__cart__icon:hover{
+    text-shadow: var(--nav-enterprise-color) 0 0 10px;
   }
 
 .home__nav__cart__icon__info{
-  margin-top: 25px;
-  margin-left: 30px;
+  margin-top: -15px;
+  margin-left: 25px;
   position: absolute;
   text-align: center;
   font-size: 62%;
@@ -154,10 +188,41 @@
   background-color: var(--notification-color);
 }
 
+.page__wrapper__navbar__list__item-account__dropdown-item{
+  color: var(--nav-color);
+}
+
+.page__wrapper__navbar__list__item-account__dropdown-link{
+  text-decoration: none;
+  color: var(--nav-color);
+}
+
+.page__wrapper__navbar__list__item-account__dropdown-link:hover{
+  text-shadow: var(--nav-enterprise-color) 0 0 5px;
+  color: var(--nav-color);
+}
+
+.page__wrapper__navbar__list__item-account__dropdown-link-logout{
+  color: var(--notification-color);
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.page__wrapper__navbar__list__item-account__dropdown-item{
+  border-radius: 5px;
+  color: var(--nav-color);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 0.3rem;
+  margin-bottom: 0.3rem;
+}
+
   @media screen and (max-width: 900px) {
 
     .page__wrapper__navbar{
       justify-content: center;
+      width: 100%;
     }
 
     .page__wrapper__navbar__container{
@@ -170,11 +235,11 @@
     }
 
     .page__wrapper__navbar__list{
-      width: 40%;
+      width: 50%;
     }
 
     .page__wrapper__navbar__list__item{
-      width: 3rem;
+      width: 4rem;
       font-size: 0.8rem;
     }
   }
