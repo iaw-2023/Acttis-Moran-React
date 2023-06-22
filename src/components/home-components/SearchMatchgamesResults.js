@@ -68,10 +68,13 @@ export default function SearchMatchgamesResults(props) {
                 id={matchgame.matchgame_id}
                 stadiumId={matchgame.stadium.stadium_id}
                 stadiumName={matchgame.stadium.stadium_name}
+                stadiumImageURL={matchgame.stadium.stadium_image_url}
                 date={matchgame.played_on_date}
                 time={matchgame.played_on_time}
                 homeTeamName={matchgame.team_one.team.team_name}
+                homeTeamImageURL={matchgame.team_one.team.team_image_url}
                 awayTeamName={matchgame.team_two.team.team_name}
+                awayTeamImageURL={matchgame.team_two.team.team_image_url}
               ></MatchgameCard>
             );
           })}
