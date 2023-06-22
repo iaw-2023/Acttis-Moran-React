@@ -2,12 +2,10 @@ import { MDBCardBody, MDBCardTitle } from "mdb-react-ui-kit";
 import { useNavigate } from "react-router-dom";
 import { motion } from "framer-motion";
 
-const stadiumPhotosPath = "/images/stadium_photos/";
-const teamLogosPath = "/images/team_logos/";
 
 export default function MatchgameCard(props) {
   const navigate = useNavigate();
-  const { stadiumName, homeTeamName, awayTeamName, date, time } = props;
+  const { stadiumName, homeTeamName,homeTeamImageURL, awayTeamName,awayTeamImageURL, stadiumImageURL, date, time } = props;
 
   return (
     <motion.div
@@ -21,20 +19,20 @@ export default function MatchgameCard(props) {
       <div className="matchgame-card__image-container">
         <img
           className="matchgame-card__image-container__stadium-image"
-          src={stadiumPhotosPath + stadiumName + ".jpg"}
+          src= { stadiumImageURL }
           position="top"
           alt="..."
         />
         <div className="matchgame-card__image-container__team-logos">
           <img
             className="matchgame-card__image-container__hometeam-image"
-            src={teamLogosPath + homeTeamName + ".png"}
+            src={ homeTeamImageURL }
             position="top"
             alt="..."
           />
           <img
             className="matchgame-card__image-container__awayteam-image"
-            src={teamLogosPath + awayTeamName + ".png"}
+            src={ awayTeamImageURL }
             position="top"
             alt="..."
           />
