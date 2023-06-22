@@ -55,7 +55,7 @@ export default function Stadium(props) {
           />
         </div>
         <div className="field">
-          <img className="field-img" src="/images/field.jpg"></img>
+          <img className="field-img" src="https://uifcknmepduhxxnszwuw.supabase.co/storage/v1/object/public/Stadiums%20Image/field.jpg"></img>
         </div>
         <div className="medium-right-stands">
           <ZoneButton
