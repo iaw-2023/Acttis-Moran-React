@@ -59,3 +59,7 @@ export const getUserOrders = async (accessToken) => {
 export const confirmOrder = async (accessToken,orderData) => {
   return axiosAuth(accessToken).post("/order/confirmorder", JSON.stringify(orderData));
 };
+
+export const authorizePayment = async (accessToken,paymentData) => {
+  return axiosAuth(accessToken).post("/order/authorizepayment", JSON.stringify(paymentData));
+};
