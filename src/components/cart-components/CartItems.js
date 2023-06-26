@@ -10,7 +10,7 @@ import {
 import { toast } from "react-hot-toast";
 import { getCartTickets } from "../../connection/requests";
 
-const stadiumPhotosPath = "/images/stadium_photos/";
+
 
 export default function CartItems(props) {
   const { cart, setCart } = useContext(CartContext);
@@ -106,9 +106,7 @@ export default function CartItems(props) {
                   <div>
                     <MDBCardImage
                       src={
-                        stadiumPhotosPath +
-                        ticket.ticketInfo.matchgame.stadium.stadium_name +
-                        ".jpg"
+                        ticket.ticketInfo.matchgame.stadium.stadium_image_url
                       }
                       fluid
                       className="rounded-3"
