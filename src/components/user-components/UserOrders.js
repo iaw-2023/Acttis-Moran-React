@@ -7,7 +7,7 @@ import OrdersResults from "./OrdersResults";
 import "../../css/userorders.css";
 import { initMercadoPago } from "@mercadopago/sdk-react";
 import { CardPayment } from "@mercadopago/sdk-react";
-import { confirmOrder, getUserOrders } from "../../connection/requests";
+import { authorizePayment, getUserOrders } from "../../connection/requests";
 
 initMercadoPago("TEST-d38676da-057a-45e3-8ad3-9779f2f281b6");
 
@@ -22,16 +22,18 @@ export default function UserOrders() {
       setMercadoPagoOrderPayment(
         <CardPayment
           initialization={{ amount: orderToPay.total_price }}
-          onSubmit={async (param) => {
-            const orderData = { orderId: orderToPay.order_id };
-            confirmOrder(auth.accessToken, orderData)
+          onSubmit={async (formData) => {
+            authorizePayment(auth.accessToken, {
+              ...formData,
+              orderId: orderToPay.order_id,
+            })
               .then(() => {
                 toast.success("Payment complete!");
                 setOrderToPay(null);
                 obtainUserOrders();
               })
               .catch(() => {
-                toast.error("Error with payment!");
+                toast.error("Error with order payment!");
               });
           }}
           customization={customization}
@@ -48,11 +50,13 @@ export default function UserOrders() {
     visual: {
       style: {
         theme: "dark",
-        customVariables: {
-          position: "absolute",
-        },
-        hideExitButton: false,
       },
+    },
+    paymentMethods: {
+      ticket: "all",
+      creditCard: "all",
+      debitCard: "all",
+      mercadoPago: "all",
     },
   };
 
