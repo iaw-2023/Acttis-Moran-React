@@ -1,4 +1,3 @@
-const teamLogosPath = "/images/team_logos/";
 
 export default function MatchgameInfo(props) {
   const { matchgame } = props;
@@ -15,7 +14,7 @@ export default function MatchgameInfo(props) {
             <img
               className="matchgametickets__stadium__container__info__local-team-logo"
               src={
-                teamLogosPath + matchgame?.team_one?.team?.team_name + ".png"
+                matchgame.team_one.team.team_image_url
               }
             />
           </div>
@@ -47,7 +46,7 @@ export default function MatchgameInfo(props) {
             <img
               className="matchgametickets__stadium__container__info__away-team-logo"
               src={
-                teamLogosPath + matchgame?.team_two?.team?.team_name + ".png"
+                matchgame.team_two.team.team_image_url
               }
             />
           </div>

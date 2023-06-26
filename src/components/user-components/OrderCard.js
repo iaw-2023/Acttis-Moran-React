@@ -2,9 +2,6 @@ import { motion } from "framer-motion";
 import TicketDetail from "./TicketDetail";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const stadiumPhotosPath = "/images/stadium_photos/";
-const teamLogosPath = "/images/team_logos/";
-
 export default function OrderCard(props) {
   const { orderInfo } = props;
   const rootStyle = document.querySelector(":root");
