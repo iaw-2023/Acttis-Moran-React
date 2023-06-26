@@ -5,82 +5,76 @@ import { Link } from "react-router-dom";
 import { MDBTypography, MDBIcon } from "mdb-react-ui-kit";
 import OrdersResults from "./OrdersResults";
 import "../../css/userorders.css";
-import { initMercadoPago } from '@mercadopago/sdk-react';
-import { CardPayment } from '@mercadopago/sdk-react';
-import {authorizePayment, confirmOrder, getUserOrders} from "../../connection/requests";
+import { initMercadoPago } from "@mercadopago/sdk-react";
+import { CardPayment } from "@mercadopago/sdk-react";
+import { authorizePayment, getUserOrders } from "../../connection/requests";
 
-initMercadoPago('TEST-d38676da-057a-45e3-8ad3-9779f2f281b6');
+initMercadoPago("TEST-d38676da-057a-45e3-8ad3-9779f2f281b6");
 
 export default function UserOrders() {
-    const [userOrders, setUserOrders] = useState([]);
-    const [orderToPay, setOrderToPay] = useState(null);
-    const [mercadoPagoOrderPayment, setMercadoPagoOrderPayment] = useState([]);
-    const { auth } = useAuth();
+  const [userOrders, setUserOrders] = useState([]);
+  const [orderToPay, setOrderToPay] = useState(null);
+  const [mercadoPagoOrderPayment, setMercadoPagoOrderPayment] = useState([]);
+  const { auth } = useAuth();
 
-    useEffect(() => {
-        if(orderToPay !== null){
-            setMercadoPagoOrderPayment(
-                <CardPayment
-                initialization={{ amount: orderToPay.total_price }}
-                onSubmit={async (formData) => {
+  useEffect(() => {
+    if (orderToPay !== null) {
+      setMercadoPagoOrderPayment(
+        <CardPayment
+          initialization={{ amount: orderToPay.total_price }}
+          onSubmit={async (formData) => {
+            authorizePayment(auth.accessToken, {
+              ...formData,
+              orderId: orderToPay.order_id,
+            })
+              .then(() => {
+                toast.success("Payment complete!");
+                setOrderToPay(null);
+                obtainUserOrders();
+              })
+              .catch(() => {
+                toast.error("Error with order payment!");
+              });
+          }}
+          customization={customization}
+          className="card__payment_mercadopago"
+        />
+      );
+      window.scrollTo(0, 0);
+    } else {
+      setMercadoPagoOrderPayment([]);
+    }
+  }, [orderToPay]);
 
-                    const orderData = {orderId: orderToPay.order_id}
-                    authorizePayment(auth.accessToken,formData).then(()=>{
-                        confirmOrder(auth.accessToken,orderData).then(()=>{
-                                toast.success("Payment complete!");
-                                setOrderToPay(null);
-                                obtainUserOrders();
-                            }
-                        ).catch(()=>{
-                            toast.error("Error confirming order!");
-                            }
-                        )
-                    }).catch(()=>{
-                        toast.error("Error with payment!");
-                    })
-
-
-                }}
-                customization={customization}
-                className="card__payment_mercadopago"
-            />);
-            window.scrollTo(0, 0);
-        }
-        else{
-            setMercadoPagoOrderPayment([]);
-        }
-    }, [orderToPay]);
-
-    const customization = {
-        visual: {
-            style: {
-                theme: 'dark'
-            },
-
-        },
-        paymentMethods: {
-            ticket: "all",
-            creditCard: "all",
-            debitCard: "all",
-            mercadoPago: "all",
-        }
-    };
+  const customization = {
+    visual: {
+      style: {
+        theme: "dark",
+      },
+    },
+    paymentMethods: {
+      ticket: "all",
+      creditCard: "all",
+      debitCard: "all",
+      mercadoPago: "all",
+    },
+  };
 
   useEffect(() => {
     window.scrollTo(0, 0);
     obtainUserOrders();
   }, []);
 
-    const obtainUserOrders = async () => {
-        getUserOrders(auth?.accessToken)
-            .then((response) => {
-                setUserOrders(response.data.data);
-            })
-            .catch(() => {
-                setUserOrders([]);
-                toast.error("There was a problem loading user Orders.");
-            });
-    };
+  const obtainUserOrders = async () => {
+    getUserOrders(auth?.accessToken)
+      .then((response) => {
+        setUserOrders(response.data.data);
+      })
+      .catch(() => {
+        setUserOrders([]);
+        toast.error("There was a problem loading user Orders.");
+      });
+  };
 
   return (
     <div className="userorders__container">
