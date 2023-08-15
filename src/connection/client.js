@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const server_path = "https://acttis-moran-laravel-sage.vercel.app/restapi/";
+const server_path = "http://localhost:8000/restapi";
 
 export default axios.create({
   baseURL: server_path,

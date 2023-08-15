@@ -2,6 +2,7 @@ import { PayPalButtons } from "@paypal/react-paypal-js";
 import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
+import { confirmOrder } from "../../connection/requests";
 
 const PaypalCheckoutButton = (props) => {
   const { product } = props;
@@ -32,20 +33,6 @@ const PaypalCheckoutButton = (props) => {
             },
           ],
         });
-        /*
-        let order = {
-          packageID: 1,
-        };
-
-        axios
-          .post(
-            "http://localhost:8000/restapi/payment/createOrder",
-            JSON.stringify(order)
-          )
-          .then((response) => response.json())
-          .then((order) => order.id)
-          .catch((error) => toast.error("Error creating Order"));
-          */
       }}
       onApprove={async (data, actions) => {
         let orderData = {
@@ -57,23 +44,9 @@ const PaypalCheckoutButton = (props) => {
 
         //Tengo que llamar al endpoint con el ID de la order y se confirma alla
         //Se actualiza el usuario a premium y listo
-
-        axios
-          .post(
-            "https://best-ai-prompts-backend.vercel.app/restapi/payment/confirmOrder",
-            {
-              orderData,
-              headers: {
-                Accept: "application/json",
-                "Content-Type": "application/json",
-              },
-            }
-          )
+        confirmOrder(orderData)
           .then((response) => toast.success(response.success))
           .catch((error) => toast.error("Error"));
-
-        //console.log(data.orderID);
-
         //handleApprove(data.orderID);
       }}
       onError={(err) => {

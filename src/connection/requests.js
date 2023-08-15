@@ -66,3 +66,7 @@ export const authorizePayment = async (accessToken, paymentData) => {
 export const socialLogIn = async (socialCredentials) => {
   return axios.post("/auth/socialLogin", JSON.stringify(socialCredentials));
 };
+
+export const confirmOrder = async (orderData) => {
+  return axios.post("/payment/confirmOrder", JSON.stringify(orderData));
+};
