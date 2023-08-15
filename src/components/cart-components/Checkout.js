@@ -4,7 +4,7 @@ import { PayPalScriptProvider } from "@paypal/react-paypal-js";
 const Checkout = () => {
   const product = {
     description: "Design+Code React Hooks Course",
-    price: 19,
+    price: 49.99,
   };
 
   return (

@@ -36,11 +36,6 @@ function LogIn() {
     onSuccess: (tokenResponse) => console.log(tokenResponse),
   });
 
-  var orderinfo_data = {
-    payment_mode: "Paid by PayPal",
-    payment_id: "",
-  };
-
   return (
     <div className="login-register__container">
       <div className="login-register__body">

@@ -50,6 +50,7 @@ const PaypalCheckoutButton = (props) => {
       onApprove={async (data, actions) => {
         let orderData = {
           orderID: data.orderID,
+          packageID: 1,
         };
 
         console.log(data);
@@ -58,12 +59,15 @@ const PaypalCheckoutButton = (props) => {
         //Se actualiza el usuario a premium y listo
 
         axios
-          .post(
-            "http://localhost:8000/restapi/payment/confirmOrder",
-            JSON.stringify(orderData)
-          )
+          .post("http://localhost:8000/restapi/payment/confirmOrder", {
+            orderData,
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+          })
           .then((response) => toast.success(response.success))
-          .catch((error) => toast.error("ASD"));
+          .catch((error) => toast.error("Error"));
 
         //console.log(data.orderID);
 
