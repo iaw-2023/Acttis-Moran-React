@@ -59,13 +59,16 @@ const PaypalCheckoutButton = (props) => {
         //Se actualiza el usuario a premium y listo
 
         axios
-          .post("http://localhost:8000/restapi/payment/confirmOrder", {
-            orderData,
-            headers: {
-              Accept: "application/json",
-              "Content-Type": "application/json",
-            },
-          })
+          .post(
+            "https://best-ai-prompts-backend.vercel.app/restapi/payment/confirmOrder",
+            {
+              orderData,
+              headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+              },
+            }
+          )
           .then((response) => toast.success(response.success))
           .catch((error) => toast.error("Error"));
 
