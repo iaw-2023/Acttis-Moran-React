@@ -1,7 +1,11 @@
 import "../../css/login-register.css";
+import { React, ReactDOM } from "react";
+import axios from "axios";
+import { toast } from "react-hot-toast";
 import { useState, useRef, useEffect, useContext } from "react";
 import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
+import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
 
 function LogIn() {
   const { logInAuth } = useAuth();
@@ -28,6 +32,15 @@ function LogIn() {
     logInAuth(email, pwd);
   };
 
+  const login = useGoogleLogin({
+    onSuccess: (tokenResponse) => console.log(tokenResponse),
+  });
+
+  var orderinfo_data = {
+    payment_mode: "Paid by PayPal",
+    payment_id: "",
+  };
+
   return (
     <div className="login-register__container">
       <div className="login-register__body">
@@ -40,6 +53,9 @@ function LogIn() {
             {errMsg}
           </p>
           <h1>Log In</h1>
+          <btn className="google-button" onClick={() => login()}>
+            Sign in with Google 🚀{" "}
+          </btn>
           <form className="login-register__form" onSubmit={handleSubmit}>
             <label className="login-register__label" htmlFor="email">
               Email

@@ -9,9 +9,7 @@ import RequireAuth from "./login-components/RequireAuth";
 import UserOrders from "./user-components/UserOrders";
 import LogIn from "./login-components/Login";
 import Register from "./login-components/Register";
-
-
-
+import Checkout from "./cart-components/Checkout";
 
 function App() {
   return (
@@ -24,6 +22,7 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/register" element={<Register />} />
+        <Route path="/paypal" element={<Checkout />} />
 
         {/* Want to protect these routes */}
         <Route element={<RequireAuth />}>

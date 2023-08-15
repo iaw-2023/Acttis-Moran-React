@@ -164,3 +164,20 @@ textarea {
     background-color: var(--hover-color);
     transition: background 1s;
 }
+
+.google-button{
+    border-radius: 5px;
+    background-color: var(--bg-color);
+    font-weight: 400;
+    font-size: 0.8rem;
+    text-shadow: #000 0 0 10px;
+    color: rgb(95, 27, 27);
+    box-shadow: black 0 0 10px;
+    transition: text 0.5s;
+}
+
+.google-button:hover{
+    background-color: var(--nav-enterprise-color);
+    color: red;
+    box-shadow: black 0 0 10px;
+}
