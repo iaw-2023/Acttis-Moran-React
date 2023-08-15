@@ -5,6 +5,10 @@ const vercel_path = "https://best-ai-prompts-backend.vercel.app";
 
 export default axios.create({
   baseURL: vercel_path,
+  cors: {
+    "Access-Control-Allow-Origin": "*",
+    "Access-Control-Allow-Headers": "Content-Type",
+  },
   headers: { "Content-Type": "application/json" },
 });
 
