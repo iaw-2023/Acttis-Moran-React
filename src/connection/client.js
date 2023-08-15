@@ -8,10 +8,6 @@ const server_path = process.env.REACT_APP_SERVER_PATH;
 
 export default axios.create({
   baseURL: server_path,
-  cors: {
-    "Access-Control-Allow-Origin": "*",
-    "Access-Control-Allow-Headers": "Content-Type",
-  },
   headers: { "Content-Type": "application/json" },
 });
 
