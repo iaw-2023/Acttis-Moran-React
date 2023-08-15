@@ -6,9 +6,10 @@ import { useState, useRef, useEffect, useContext } from "react";
 import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 import { GoogleLogin, useGoogleLogin } from "@react-oauth/google";
+import { socialLogIn } from "../../connection/requests";
 
 function LogIn() {
-  const { logInAuth } = useAuth();
+  const { logInAuth, setAuth } = useAuth();
 
   const userRef = useRef();
   const errorRef = useRef();
@@ -33,7 +34,30 @@ function LogIn() {
   };
 
   const login = useGoogleLogin({
-    onSuccess: (tokenResponse) => console.log(tokenResponse),
+    onSuccess: (tokenResponse) => {
+      let accessToken = tokenResponse.access_token;
+      let socialCredentials = {
+        access_token: accessToken,
+      };
+      toast.promise(socialLogIn(socialCredentials), {
+        loading: "Logging In...",
+        success: (response) => {
+          const accessToken = response.data.access_token;
+
+          setAuth({ accessToken });
+
+          return <b>Successfuly logged in!</b>;
+        },
+        error: (error) => {
+          return (
+            <span>
+              The next error happened while making loggin :{" "}
+              {error?.response?.data?.errors}
+            </span>
+          );
+        },
+      });
+    },
   });
 
   return (

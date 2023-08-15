@@ -22,11 +22,11 @@ function App() {
         <Route path="/contact" element={<Contact />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/register" element={<Register />} />
-        <Route path="/paypal" element={<Checkout />} />
 
         {/* Want to protect these routes */}
         <Route element={<RequireAuth />}>
           <Route path="/userorders" element={<UserOrders />} />
+          <Route path="/paypal" element={<Checkout />} />
         </Route>
 
         {/* Catch all (pages that doesnt exists) */}

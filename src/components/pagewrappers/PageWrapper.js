@@ -62,6 +62,14 @@ export default function PageWrapper(props) {
             <MDBDropdownItem className="page__wrapper__navbar__list__item-account__dropdown-item">
               <Link
                 className="page__wrapper__navbar__list__item-account__dropdown-link"
+                to="/paypal"
+              >
+                Payment
+              </Link>
+            </MDBDropdownItem>
+            <MDBDropdownItem className="page__wrapper__navbar__list__item-account__dropdown-item">
+              <Link
+                className="page__wrapper__navbar__list__item-account__dropdown-link"
                 to="/userorders"
               >
                 My Orders

@@ -3,8 +3,10 @@ import { useState } from "react";
 import axios from "axios";
 import { toast } from "react-hot-toast";
 import { confirmOrder } from "../../connection/requests";
+import useAuth from "../../hooks/useAuth";
 
 const PaypalCheckoutButton = (props) => {
+  const { auth } = useAuth();
   const { product } = props;
   const [paidFor, setPaidFor] = useState(false);
   const [error, setError] = useState(null);
@@ -44,9 +46,15 @@ const PaypalCheckoutButton = (props) => {
 
         //Tengo que llamar al endpoint con el ID de la order y se confirma alla
         //Se actualiza el usuario a premium y listo
-        confirmOrder(orderData)
-          .then((response) => toast.success("Payment Completed!"))
-          .catch((error) => toast.error("Error"));
+        toast.promise(confirmOrder(auth?.accessToken, orderData), {
+          loading: "Making Payment...",
+          success: (response) => {
+            return <b>Successfuly made payment!</b>;
+          },
+          error: (error) => {
+            return <b>Error while making payment!</b>;
+          },
+        });
         //handleApprove(data.orderID);
       }}
       onError={(err) => {
