@@ -45,7 +45,7 @@ const PaypalCheckoutButton = (props) => {
         //Tengo que llamar al endpoint con el ID de la order y se confirma alla
         //Se actualiza el usuario a premium y listo
         confirmOrder(orderData)
-          .then((response) => toast.success(response.success))
+          .then((response) => toast.success("Payment Completed!"))
           .catch((error) => toast.error("Error"));
         //handleApprove(data.orderID);
       }}
