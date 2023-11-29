@@ -227,7 +227,7 @@
   }
   
   .matchgame-card__title{
-    color: var(--nav-enterprise-color);
+    color: var(--nav-enterprise-color) !important;
     font-size: 0.9rem;
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
